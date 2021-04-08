@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "689798543658",
+    "project_id": "nearplace-cefd0",
+    "storage_bucket": "nearplace-cefd0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:689798543658:android:b6f7f0d7394d51b3188653",
+        "android_client_info": {
+          "package_name": "com.example.flutterapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "689798543658-8fgfsm0592iscnthpl68gn12ifv3s75o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7pCY_KA9jMPjoDnwMZAd_g1b0x94QRG4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "689798543658-8fgfsm0592iscnthpl68gn12ifv3s75o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
