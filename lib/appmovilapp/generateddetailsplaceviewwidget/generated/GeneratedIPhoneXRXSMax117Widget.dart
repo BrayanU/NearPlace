@@ -1,3 +1,4 @@
+import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp/appmovilapp/generateddetailsplaceviewwidget/generated/GeneratedStar1Widget2.dart';
 import 'package:flutterapp/appmovilapp/generateddetailsplaceviewwidget/generated/GeneratedStar1Widget1.dart';
@@ -177,6 +178,12 @@ class GeneratedIPhoneXRXSMax117Widget extends StatelessWidget {
               height: 35.0,
               child: GeneratedXWidget1(),
             ),
+            Positioned(
+                top: 200,
+                left: 330,
+                child: FavoriteButton(
+                  valueChanged: (_) {},
+                )),
             Positioned(
               left: 85.89399719238281,
               top: 159.0,
