@@ -9,8 +9,7 @@ class GeneratedGroup23Widget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () =>
-          Navigator.pushNamed(context, '/GeneratedDetailsplaceviewWidget'),
+      // onTap: () =>          Navigator.pushNamed(context, '/GeneratedDetailsplaceviewWidget'),
       child: Container(
         width: 271.0,
         height: 45.0,
