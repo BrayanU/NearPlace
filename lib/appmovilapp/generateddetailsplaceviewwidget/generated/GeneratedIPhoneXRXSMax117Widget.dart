@@ -1,5 +1,6 @@
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutterapp/appmovilapp/generateddetailsplaceviewwidget/generated/GeneratedStar1Widget2.dart';
 import 'package:flutterapp/appmovilapp/generateddetailsplaceviewwidget/generated/GeneratedStar1Widget1.dart';
 import 'package:flutterapp/appmovilapp/generateddetailsplaceviewwidget/generated/GeneratedFotolugarWidget.dart';
@@ -43,7 +44,7 @@ class GeneratedIPhoneXRXSMax117Widget extends StatelessWidget {
           alignment: Alignment.center,
           overflow: Overflow.visible,
           children: [
-            Positioned(
+            /* Positioned(
               left: 22.0,
               top: 12.0,
               right: null,
@@ -51,8 +52,8 @@ class GeneratedIPhoneXRXSMax117Widget extends StatelessWidget {
               width: 414.0,
               height: 896.0,
               child: GeneratedVectorWidget30(),
-            ),
-            Positioned(
+            ), */
+            /* Positioned(
               left: 0.0,
               top: 0.0,
               right: null,
@@ -60,8 +61,8 @@ class GeneratedIPhoneXRXSMax117Widget extends StatelessWidget {
               width: 459.0,
               height: 930.0,
               child: GeneratedRectangle3Widget6(),
-            ),
-            Positioned(
+            ), */
+            /* Positioned(
               left: 0.0,
               top: 69.0,
               right: null,
@@ -69,8 +70,8 @@ class GeneratedIPhoneXRXSMax117Widget extends StatelessWidget {
               width: 515.0,
               height: 890.0,
               child: GeneratedMapWidget3(),
-            ),
-            Positioned(
+            ), */
+            /* Positioned(
               left: 18.0,
               top: 12.0,
               right: null,
@@ -87,8 +88,8 @@ class GeneratedIPhoneXRXSMax117Widget extends StatelessWidget {
               width: 84.0,
               height: 81.0,
               child: GeneratedRectangle7Widget3(),
-            ),
-            Positioned(
+            ), */
+            /*  Positioned(
               left: 369.5,
               top: 32.5,
               right: null,
@@ -114,8 +115,8 @@ class GeneratedIPhoneXRXSMax117Widget extends StatelessWidget {
               width: 48.426998138427734,
               height: 0.0,
               child: GeneratedLine3Widget3(),
-            ),
-            Positioned(
+            ), */
+            /* Positioned(
               left: 61.0,
               top: 35.0,
               right: null,
@@ -123,8 +124,8 @@ class GeneratedIPhoneXRXSMax117Widget extends StatelessWidget {
               width: 96.0,
               height: 30.0,
               child: GeneratedOpcinWidget1(),
-            ),
-            Positioned(
+            ), */
+            /* Positioned(
               left: 109.0,
               top: 242.0,
               right: null,
@@ -159,41 +160,44 @@ class GeneratedIPhoneXRXSMax117Widget extends StatelessWidget {
               width: 31.388015747070312,
               height: 75.8479995727539,
               child: GeneratedPinWidget7(),
-            ),
-            Positioned(
-              left: 56.0,
-              top: 127.0,
-              right: null,
-              bottom: null,
-              width: 347.0,
-              height: 724.0,
-              child: GeneratedGroupWidget1(),
-            ),
-            Positioned(
-              left: 363.95098876953125,
-              top: 144.0,
-              right: null,
-              bottom: null,
-              width: 22.0,
-              height: 35.0,
-              child: GeneratedXWidget1(),
-            ),
-            Positioned(
-                top: 200,
-                left: 330,
-                child: FavoriteButton(
-                  valueChanged: (_) {},
-                )),
-            Positioned(
-              left: 85.89399719238281,
-              top: 159.0,
-              right: null,
-              bottom: null,
-              width: 180.0,
-              height: 35.0,
-              child: GeneratedNombreLugarWidget(),
-            ),
-            Positioned(
+            ), */
+            Stack(
+              children: [
+                Positioned(
+                  left: 56.0,
+                  top: 127.0,
+                  right: null,
+                  bottom: null,
+                  width: 347.0,
+                  height: 724.0,
+                  child: GeneratedGroupWidget1(),
+                ),
+                Positioned(
+                  left: 363.95098876953125,
+                  top: 144.0,
+                  right: null,
+                  bottom: null,
+                  width: 22.0,
+                  height: 35.0,
+                  child: GeneratedXWidget1(),
+                ),
+                Positioned(
+                    top: 190,
+                    left: 330,
+                    child: FavoriteButton(
+                      iconSize: 40,
+                      valueChanged: (_) {},
+                    )),
+                Positioned(
+                  left: 85.89399719238281,
+                  top: 159.0,
+                  right: null,
+                  bottom: null,
+                  width: 180.0,
+                  height: 35.0,
+                  child: GeneratedNombreLugarWidget(),
+                ),
+                /* Positioned(
               left: 86.00221252441406,
               top: 198.99948120117188,
               right: null,
@@ -237,69 +241,85 @@ class GeneratedIPhoneXRXSMax117Widget extends StatelessWidget {
               width: 23.236413955688477,
               height: 22.275136947631836,
               child: GeneratedStar1Widget4(),
-            ),
-            Positioned(
-              left: 221.34100341796875,
-              top: 200.0,
-              right: null,
-              bottom: null,
-              width: 95.0,
-              height: 22.0,
-              child: Generated276reseasWidget(),
-            ),
-            Positioned(
-              left: 82.0,
-              top: 258.0,
-              right: null,
-              bottom: null,
-              width: 294.0,
-              height: 256.0,
-              child: GeneratedRectangle12Widget(),
-            ),
-            Positioned(
-              left: 183.47799682617188,
-              top: 373.0,
-              right: null,
-              bottom: null,
-              width: 92.0,
-              height: 25.0,
-              child: GeneratedFotolugarWidget(),
-            ),
-            Positioned(
-              left: 86.0,
-              top: 537.0,
-              right: null,
-              bottom: null,
-              width: 160.0,
-              height: 23.0,
-              child: GeneratedDescripcinlugarWidget(),
-            ),
-            Positioned(
-              left: 183.4199981689453,
-              top: 575.0,
-              right: null,
-              bottom: null,
-              width: 97.0,
-              height: 33.0,
-              child: GeneratedReseasWidget(),
-            ),
-            Positioned(
-              left: 106.00180053710938,
-              top: 614.0,
-              right: null,
-              bottom: null,
-              width: 244.1741943359375,
-              height: 187.00001525878906,
-              child: GeneratedRepeatGrid1Widget(),
-            ),
-            Positioned(
-              left: 198.0,
-              top: 809.0,
-              right: null,
-              bottom: null,
-              width: 69.0,
-              height: 29.0,
-              child: GeneratedGroup21Widget1(),
+            ), */
+                Positioned(
+                    top: 198,
+                    left: 85,
+                    child: RatingBarIndicator(
+                      rating: 3.5,
+                      direction: Axis.horizontal,
+                      itemCount: 5,
+                      itemSize: 25,
+                      itemPadding: EdgeInsets.symmetric(horizontal: 0.0),
+                      itemBuilder: (context, _) => Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                      ),
+                    )),
+                Positioned(
+                  left: 221.34100341796875,
+                  top: 200.0,
+                  right: null,
+                  bottom: null,
+                  width: 95.0,
+                  height: 22.0,
+                  child: Generated276reseasWidget(),
+                ),
+                Positioned(
+                  left: 82.0,
+                  top: 258.0,
+                  right: null,
+                  bottom: null,
+                  width: 294.0,
+                  height: 256.0,
+                  child: GeneratedRectangle12Widget(),
+                ),
+                Positioned(
+                  left: 183.47799682617188,
+                  top: 373.0,
+                  right: null,
+                  bottom: null,
+                  width: 92.0,
+                  height: 25.0,
+                  child: GeneratedFotolugarWidget(),
+                ),
+                Positioned(
+                  left: 86.0,
+                  top: 537.0,
+                  right: null,
+                  bottom: null,
+                  width: 160.0,
+                  height: 23.0,
+                  child: GeneratedDescripcinlugarWidget(),
+                ),
+                Positioned(
+                  left: 183.4199981689453,
+                  top: 575.0,
+                  right: null,
+                  bottom: null,
+                  width: 97.0,
+                  height: 33.0,
+                  child: GeneratedReseasWidget(),
+                ),
+                Positioned(
+                  left: 106.00180053710938,
+                  top: 614.0,
+                  right: null,
+                  bottom: null,
+                  width: 244.1741943359375,
+                  height: 187.00001525878906,
+                  child: GeneratedRepeatGrid1Widget(),
+                ),
+                Positioned(
+                  left: 198.0,
+                  top: 809.0,
+                  right: null,
+                  bottom: null,
+                  width: 69.0,
+                  height: 29.0,
+                  child: GeneratedGroup21Widget1(),
+                )
+              ],
             )
           ]),
     );
