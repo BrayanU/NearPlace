@@ -35,22 +35,63 @@ class reviewForm {
   double rate = 3;
 }
 
-class GeneratedIPhoneXRXSMax118Widget extends StatelessWidget {
+class GeneratedIPhoneXRXSMax118Widget extends StatefulWidget {
+  final ValueChanged<bool> setTrue;
+  final String placeName;
+  const GeneratedIPhoneXRXSMax118Widget({Key key, this.setTrue, this.placeName})
+      : super(key: key);
+  @override
+  _GeneratedIPhoneXRXSMax118WidgetState createState() =>
+      _GeneratedIPhoneXRXSMax118WidgetState();
+}
+
+class _GeneratedIPhoneXRXSMax118WidgetState
+    extends State<GeneratedIPhoneXRXSMax118Widget> {
   reviewForm rf = new reviewForm();
+
   CollectionReference ratings =
       FirebaseFirestore.instance.collection('ratings');
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  Future<void> addRating(uid, rate, text) {
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  CollectionReference places = FirebaseFirestore.instance.collection('places');
+
+  Future<void> addRating(uid, rate, text) async {
+    var total;
     print(rate);
-    return ratings
-        .add({"uid": (uid), "text": text.toString().trim(), "rate": (rate)})
-        .then((value) => print("Rating added to db " + value.toString()))
+    return await ratings
+        .add({
+          "placeName": widget.placeName,
+          "userName": (uid),
+          "text": text.toString().trim(),
+          "rate": (rate)
+        })
+        .then((value) async => {
+              print("Rating added to db " + value.toString()),
+              await places
+                  .where('name', isEqualTo: widget.placeName)
+                  .get()
+                  .then((value) async => {
+                        total =
+                            (value.docs[0].data()['accumulatedRating'] + rate) /
+                                (value.docs[0].data()['totalRating'] + 1),
+                        total = num.parse(total.toStringAsFixed(2)),
+                        await places.doc(value.docs[0].id).update({
+                          'accumulatedRating':
+                              value.docs[0].data()['accumulatedRating'] + rate,
+                          'totalRating':
+                              value.docs[0].data()['totalRating'] + 1,
+                          'rating': total
+                        })
+                        /* await value.docs.first.data().update(
+                            "accumulatedRating", (value) => {value + rate}) */
+                      })
+            })
         .catchError((error) => print("Failed to add Rating: $error"));
   }
 
   @override
   Widget build(BuildContext context) {
+    CollectionReference user = FirebaseFirestore.instance.collection('user');
     return Container(
       width: 515.0,
       height: 959.0,
@@ -59,7 +100,7 @@ class GeneratedIPhoneXRXSMax118Widget extends StatelessWidget {
           alignment: Alignment.center,
           overflow: Overflow.visible,
           children: [
-            Positioned(
+            /*   Positioned(
               left: 22.0,
               top: 12.0,
               right: null,
@@ -67,8 +108,8 @@ class GeneratedIPhoneXRXSMax118Widget extends StatelessWidget {
               width: 414.0,
               height: 896.0,
               child: GeneratedVectorWidget31(),
-            ),
-            Positioned(
+            ), */
+            /*  Positioned(
               left: 0.0,
               top: 0.0,
               right: null,
@@ -76,8 +117,8 @@ class GeneratedIPhoneXRXSMax118Widget extends StatelessWidget {
               width: 459.0,
               height: 930.0,
               child: GeneratedRectangle3Widget7(),
-            ),
-            Positioned(
+            ), */
+            /*  Positioned(
               left: 0.0,
               top: 69.0,
               right: null,
@@ -85,8 +126,8 @@ class GeneratedIPhoneXRXSMax118Widget extends StatelessWidget {
               width: 515.0,
               height: 890.0,
               child: GeneratedMapWidget4(),
-            ),
-            Positioned(
+            ), */
+            /*  Positioned(
               left: 18.0,
               top: 12.0,
               right: null,
@@ -103,8 +144,8 @@ class GeneratedIPhoneXRXSMax118Widget extends StatelessWidget {
               width: 84.0,
               height: 81.0,
               child: GeneratedRectangle7Widget4(),
-            ),
-            Positioned(
+            ), */
+            /* Positioned(
               left: 369.5,
               top: 32.5,
               right: null,
@@ -130,8 +171,8 @@ class GeneratedIPhoneXRXSMax118Widget extends StatelessWidget {
               width: 48.426998138427734,
               height: 0.0,
               child: GeneratedLine3Widget4(),
-            ),
-            Positioned(
+            ), */
+            /*  Positioned(
               left: 61.0,
               top: 35.0,
               right: null,
@@ -175,10 +216,10 @@ class GeneratedIPhoneXRXSMax118Widget extends StatelessWidget {
               width: 31.388015747070312,
               height: 75.8479995727539,
               child: GeneratedPinWidget11(),
-            ),
+            ), */
             Positioned(
-              left: 56.0,
-              top: 127.0,
+              left: 25,
+              top: 10,
               right: null,
               bottom: null,
               width: 347.0,
@@ -186,8 +227,8 @@ class GeneratedIPhoneXRXSMax118Widget extends StatelessWidget {
               child: GeneratedGroupWidget2(),
             ),
             Positioned(
-              left: 88.89399719238281,
-              top: 185.0,
+              left: 40,
+              top: 55,
               right: null,
               bottom: null,
               width: 180.0,
@@ -195,8 +236,8 @@ class GeneratedIPhoneXRXSMax118Widget extends StatelessWidget {
               child: GeneratedNombreLugarWidget1(),
             ),
             Positioned(
-              left: 82.0,
-              top: 258.0,
+              left: 40,
+              top: 110,
               right: null,
               bottom: null,
               width: 294.0,
@@ -223,8 +264,8 @@ class GeneratedIPhoneXRXSMax118Widget extends StatelessWidget {
               child: GeneratedEscribetureseaWidget(),
             ), */
             Positioned(
-              left: 77.0,
-              top: 668.0,
+              left: 38,
+              top: 530,
               right: null,
               bottom: null,
               width: 271.0,
@@ -235,25 +276,36 @@ class GeneratedIPhoneXRXSMax118Widget extends StatelessWidget {
                   print(rf.text);
                   print(rf.rate);
                   print(FirebaseAuth.instance.currentUser.uid);
-                  /* await addRating(
-                      FirebaseAuth.instance.currentUser.uid, rf.rate, rf.text);
-                   */ /* Navigator.pushNamed(
+                  await user
+                      .where('userId',
+                          isEqualTo: FirebaseAuth.instance.currentUser.uid)
+                      .get()
+                      .then((value) async => print(await addRating(
+                              value.docs.first.data()['name'], rf.rate, rf.text)
+                          .then((value) => widget.setTrue(false))));
+                  /*   */
+                  /* Navigator.pushNamed(
                       context, '/GeneratedDetailsplaceviewWidget'); */
                 },
               ), //Crear
             ),
             Positioned(
-              left: 94.0,
-              top: 728.0,
+              left: 55,
+              top: 590,
               right: null,
               bottom: null,
               width: 271.0,
               height: 45.0,
-              child: GeneratedGroup24Widget(),
+              child: GestureDetector(
+                child: GeneratedGroup24Widget(), //Cancelar
+                onTap: () {
+                  widget.setTrue(false);
+                },
+              ),
             ),
             Positioned(
-                top: 550,
-                left: 110,
+                top: 400,
+                left: 60,
                 child: RatingBar.builder(
                   initialRating: 3,
                   minRating: 0.5,

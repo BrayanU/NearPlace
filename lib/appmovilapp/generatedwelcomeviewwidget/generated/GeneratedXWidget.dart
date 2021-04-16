@@ -8,7 +8,7 @@ class GeneratedXWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () =>
-          Navigator.pushNamed(context, '/GeneratedDetailsplaceviewWidget'),
+          Navigator.pushNamed(context, '/GeneratedUnfilteredviewWidget'),
       child: Text(
         '''X''',
         overflow: TextOverflow.visible,

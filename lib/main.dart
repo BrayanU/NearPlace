@@ -5,6 +5,7 @@ import 'package:flutterapp/appmovilapp/generatedprimeraviewwidget/GeneratedPrime
 import 'package:flutterapp/appmovilapp/generatedsignupviewwidget/GeneratedSignUpviewWidget.dart';
 import 'package:flutterapp/appmovilapp/generatedloginviewwidget/GeneratedLogInviewWidget.dart';
 import 'package:flutterapp/appmovilapp/generatedsignupviewwidget/userCreationGoogle.dart';
+import 'package:flutterapp/appmovilapp/generatedunfilteredviewwidget/generated/GeneratedIPhoneXRXSMax1110Widget.dart';
 import 'package:flutterapp/appmovilapp/generatedwelcomeviewwidget/GeneratedWelcomeviewWidget.dart';
 import 'package:flutterapp/appmovilapp/generatedoptionsviewwidget/GeneratedOptionsviewWidget.dart';
 import 'package:flutterapp/appmovilapp/generatedfilteredviewwidget/GeneratedFilteredviewWidget.dart';
@@ -27,7 +28,7 @@ class appMovilApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.orange,
       ),
       home: Scaffold(
           body: FutureBuilder(
@@ -68,7 +69,7 @@ class appMovilApp extends StatelessWidget {
         '/GeneratedWeatherviewWidget': (context) =>
             GeneratedWeatherviewWidget(),
         '/GeneratedUnfilteredviewWidget': (context) =>
-            GeneratedUnfilteredviewWidget(),
+            GeneratedIPhoneXRXSMax1110Widget(),
         '/GeneratedSearchviewWidget': (context) => GeneratedSearchviewWidget(),
       },
     );
