@@ -17,6 +17,7 @@ dependencies:
   path_drawing: "^0.4.1"
   flutter: 
     sdk: "flutter"
+  weather: ^2.0.0
 dev_dependencies: 
   flutter_test: 
     sdk: "flutter"
