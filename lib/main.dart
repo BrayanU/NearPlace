@@ -6,6 +6,7 @@ import 'package:flutterapp/appmovilapp/generatedsignupviewwidget/GeneratedSignUp
 import 'package:flutterapp/appmovilapp/generatedloginviewwidget/GeneratedLogInviewWidget.dart';
 import 'package:flutterapp/appmovilapp/generatedsignupviewwidget/userCreationGoogle.dart';
 import 'package:flutterapp/appmovilapp/generatedunfilteredviewwidget/generated/GeneratedIPhoneXRXSMax1110Widget.dart';
+import 'package:flutterapp/appmovilapp/generatedweatherviewwidget/generated/GeneratedIPhoneXRXSMax119Widget.dart';
 import 'package:flutterapp/appmovilapp/generatedwelcomeviewwidget/GeneratedWelcomeviewWidget.dart';
 import 'package:flutterapp/appmovilapp/generatedoptionsviewwidget/GeneratedOptionsviewWidget.dart';
 import 'package:flutterapp/appmovilapp/generatedfilteredviewwidget/GeneratedFilteredviewWidget.dart';
@@ -67,7 +68,7 @@ class appMovilApp extends StatelessWidget {
             GeneratedDetailsplaceviewWidget(),
         '/GeneratedReviewviewWidget': (context) => GeneratedReviewviewWidget(),
         '/GeneratedWeatherviewWidget': (context) =>
-            GeneratedWeatherviewWidget(),
+            GeneratedIPhoneXRXSMax119Widget(),
         '/GeneratedUnfilteredviewWidget': (context) =>
             GeneratedIPhoneXRXSMax1110Widget(),
         '/GeneratedSearchviewWidget': (context) => GeneratedSearchviewWidget(),
