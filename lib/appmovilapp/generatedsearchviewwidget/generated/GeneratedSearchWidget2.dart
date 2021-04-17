@@ -8,7 +8,7 @@ class GeneratedSearchWidget2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, '/GeneratedFilteredviewWidget'),
+      //onTap: () => Navigator.pushNamed(context, '/GeneratedFilteredviewWidget'),
       child: Container(
         width: 36.0,
         height: 32.0,

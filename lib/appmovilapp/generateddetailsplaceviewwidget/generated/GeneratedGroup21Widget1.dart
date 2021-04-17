@@ -9,7 +9,7 @@ class GeneratedGroup21Widget1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, '/GeneratedReviewviewWidget'),
+      // onTap: () => Navigator.pushNamed(context, '/GeneratedReviewviewWidget'),
       child: Container(
         width: 69.0,
         height: 29.0,
