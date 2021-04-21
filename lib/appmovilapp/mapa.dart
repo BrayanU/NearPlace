@@ -181,10 +181,11 @@ class _Mapa extends State<Mapa> {
                                   }
                               }), */
                       print(word['types']),
-                      for (var types in word['types'])
+                      for (var i = 0; i < 2; i++)
                         {
-                          str += types.replaceAll("_", " ") + ", ",
+                          str += word['types'][i].replaceAll("_", " ") + ", ",
                         },
+                      str += word['types'][2].replaceAll("_", " "),
                       pc.type = str,
                       str = "",
                       pc.location = LatLng(word['geometry']['location']['lat'],
@@ -302,8 +303,9 @@ class _Mapa extends State<Mapa> {
   }
 
   bool checkSearch(String searchFor) {
-    if (searchFor != " ") {
+    if (searchFor.trim().isEmpty) {
       print("Did I make it?");
+      _marker.clear();
       for (var pc in _places) {
         if (pc.name.toLowerCase().contains(searchFor.toLowerCase())) {
           _marker.add(_markers
