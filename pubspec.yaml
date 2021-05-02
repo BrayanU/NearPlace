@@ -11,6 +11,7 @@ dependencies:
   firebase_auth: ^1.0.1
   cloud_firestore: ^1.0.4
   google_sign_in: ^5.0.0
+  flutter_polyline_points: ^1.0.0
   http: ^0.13.1
   favorite_button: ^0.0.3
   flutter_signin_button: ^1.1.0
@@ -18,6 +19,7 @@ dependencies:
   flutter: 
     sdk: "flutter"
   weather: ^2.0.0
+  geocoding: ^2.0.0
 dev_dependencies: 
   flutter_test: 
     sdk: "flutter"

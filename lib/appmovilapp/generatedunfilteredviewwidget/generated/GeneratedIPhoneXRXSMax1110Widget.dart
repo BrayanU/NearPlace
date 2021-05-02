@@ -31,9 +31,16 @@ class _GeneratedIPhoneXRXSMax1110WidgetState
     extends State<GeneratedIPhoneXRXSMax1110Widget> {
   bool searching = false, _weather = false;
   String namePlace = " ";
+  bool routing = false;
   String tmpName;
   double temperature;
   String desc;
+
+  bool _setRouting(bool sw) {
+    setState(() {
+      routing = sw;
+    });
+  }
 
   bool _setWeather(bool sw) {
     setState(() {
@@ -94,39 +101,45 @@ class _GeneratedIPhoneXRXSMax1110WidgetState
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: searching
-              ? Row(children: [
-                  Container(
-                      height: 40,
-                      width: 200,
-                      alignment: Alignment.center,
-                      child: TextField(
-                          onChanged: (value) {
-                            tmpName = value;
+          title: routing
+              ? MaterialButton(
+                  child: Text("Finish Routing"),
+                  onPressed: () {
+                    _setRouting(false);
+                  })
+              : searching
+                  ? Row(children: [
+                      Container(
+                          height: 40,
+                          width: 200,
+                          alignment: Alignment.center,
+                          child: TextField(
+                              onChanged: (value) {
+                                tmpName = value;
+                              },
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20.0)),
+                                labelText: 'Buscar',
+                              ))),
+                      Container(
+                        padding: EdgeInsets.all(8.0),
+                        child: GestureDetector(
+                          child: GeneratedSearchWidget2(),
+                          onTap: () {
+                            setState(() {
+                              searching = false;
+                              print(tmpName);
+                              namePlace = tmpName;
+                              tmpName = "";
+                            });
                           },
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20.0)),
-                            labelText: 'Buscar',
-                          ))),
-                  Container(
-                    padding: EdgeInsets.all(8.0),
-                    child: GestureDetector(
-                      child: GeneratedSearchWidget2(),
-                      onTap: () {
-                        setState(() {
-                          searching = false;
-                          print(tmpName);
-                          namePlace = tmpName;
-                          tmpName = "";
-                        });
-                      },
-                    ),
-                  )
-                ])
-              : Text("NearPlace"),
+                        ),
+                      )
+                    ])
+                  : Text("NearPlace"),
         ),
         endDrawer: Drawer(
           child: Center(
@@ -161,6 +174,8 @@ class _GeneratedIPhoneXRXSMax1110WidgetState
           children: [
             Mapa(
               searchFor: this.namePlace,
+              routing: _setRouting,
+              offRoute: this.routing,
               center: LatLng(11.0040, -74.8071),
               zoom: 50,
               //markers: _markers,
