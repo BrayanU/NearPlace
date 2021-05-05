@@ -399,7 +399,7 @@ class GeneratedIPhoneXRXSMax117WidgetState
                       : Text("No se han realizado reseñas, se el primero!"),
                 ),
                 Positioned(
-                  left: 150.0,
+                  left: 170.0,
                   top: 650.0,
                   right: null,
                   bottom: null,
@@ -414,16 +414,22 @@ class GeneratedIPhoneXRXSMax117WidgetState
                   ),
                 ),
                 Positioned(
-                    left: 100,
+                    left: 80,
                     top: 650,
                     width: 69,
                     height: 29,
                     child: GestureDetector(
-                      child: Text("GO"),
-                      onTap: () {
+                      child:  MaterialButton(
+                      color: Colors.orange,
+                      child: Text("Go",
+                      style: new TextStyle(
+                            fontSize: 20,
+                            color: Colors.white
+                          )),
+                      onPressed: () {
                         widget.setRoute(true);
                         widget.setFalse(false);
-                      },
+                      }),
                     ))
               ],
             )
