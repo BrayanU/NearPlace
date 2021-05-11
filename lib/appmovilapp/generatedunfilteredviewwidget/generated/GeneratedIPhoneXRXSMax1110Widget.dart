@@ -104,47 +104,48 @@ class _GeneratedIPhoneXRXSMax1110WidgetState
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: 
-               searching
-                  ? Row(children: [
-                      Container(
-                          height: 40,
-                          width: 200,
-                          alignment: Alignment.center,
-                          child: TextField(
-                              onChanged: (value) {
-                                tmpName = value;
-                              },
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.white,
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20.0)),
-                                labelText: 'Buscar',
-                              ))),
-                      Container(
-                        padding: EdgeInsets.all(8.0),
-                        child: GestureDetector(
-                          child: GeneratedSearchWidget2(),
-                          onTap: () {
-                            setState(() {
-                              searching = false;
-                              print(tmpName);
-                              namePlace = tmpName;
-                              tmpName = "";
-                            });
+          title: searching
+              ? Row(children: [
+                  Container(
+                      height: 40,
+                      width: 200,
+                      alignment: Alignment.center,
+                      child: TextField(
+                          onChanged: (value) {
+                            tmpName = value;
                           },
-                        ),
-                      )
-                    ])
-                  : Text("NearPlace"),
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20.0)),
+                            labelText: 'Buscar',
+                          ))),
+                  Container(
+                    padding: EdgeInsets.all(8.0),
+                    child: GestureDetector(
+                      child: GeneratedSearchWidget2(),
+                      onTap: () {
+                        setState(() {
+                          searching = false;
+                          print(tmpName);
+                          namePlace = tmpName;
+                          tmpName = "";
+                        });
+                      },
+                    ),
+                  )
+                ])
+              : Text("NearPlace"),
         ),
         endDrawer: Drawer(
+          key: Key("Drawer"),
           child: Center(
               child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               MaterialButton(
+                key: Key("Search"),
                 child: Text("Search"),
                 onPressed: () {
                   setState(() {
@@ -164,7 +165,9 @@ class _GeneratedIPhoneXRXSMax1110WidgetState
                           Navigator.pop(context)
                         });
                   }),
-                  MaterialButton(onPressed: () async {
+              MaterialButton(
+                child: Text("Sign Out"),
+                onPressed: () async {
                   print(FirebaseAuth.instance.currentUser);
                   await FirebaseAuth.instance
                       .signOut()
@@ -175,14 +178,14 @@ class _GeneratedIPhoneXRXSMax1110WidgetState
                           })
                       .catchError(
                           (error) => {print("Error was caught: $error")});
-                },)
+                },
+              )
             ],
           )),
         ),
         body: Container(
             child: Stack(
-            
-            children: [
+          children: [
             Mapa(
               searchFor: this.namePlace,
               routing: _setRouting,
@@ -191,34 +194,28 @@ class _GeneratedIPhoneXRXSMax1110WidgetState
               zoom: 50,
               //markers: _markers,
             ),
-            routing ?  Positioned(
-                left: 55,
-                right: 55,
-              child: Container(
-                alignment: Alignment.center,
-                height: 80,
-                width: 350,
-                color: Colors.orange,
-                child: 
-                  Column(
-                    children: [
-                      
-                      Text("Origen --------------> Lugar 2", 
-                          style: new TextStyle(
-                            fontSize: 20
-                          )),
-                      MaterialButton(
-                        
-                      child: Text("Press here to Finish Routing",
-                      style: new TextStyle(
-                            fontSize: 20
-                          )),
-                      onPressed: () {
-                        _setRouting(false);
-                      })
-                    ],
-                  )
-                  )): Container(),
+            routing
+                ? Positioned(
+                    left: 55,
+                    right: 55,
+                    child: Container(
+                        alignment: Alignment.center,
+                        height: 80,
+                        width: 350,
+                        color: Colors.orange,
+                        child: Column(
+                          children: [
+                            Text("Origen --------------> Lugar 2",
+                                style: new TextStyle(fontSize: 20)),
+                            MaterialButton(
+                                child: Text("Press here to Finish Routing",
+                                    style: new TextStyle(fontSize: 20)),
+                                onPressed: () {
+                                  _setRouting(false);
+                                })
+                          ],
+                        )))
+                : Container(),
             Container(
                 alignment: Alignment.center,
                 height: 700,

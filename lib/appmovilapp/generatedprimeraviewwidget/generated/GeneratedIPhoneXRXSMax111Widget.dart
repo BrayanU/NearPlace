@@ -59,12 +59,15 @@ class GeneratedIPhoneXRXSMax111Widget extends StatelessWidget {
               width: 339.0,
               height: 60.0,
               child: MaterialButton(
+                  key: Key("SignUpEmail"),
                   child: GeneratedGroup2Widget(),
                   onPressed: () {
-                    Navigator.pushNamed(context, '/GeneratedSignUpviewWidget');
+                    Navigator.pushNamed(
+                        context, '/GeneratedIPhoneXRXSMax112Widget');
                   }), //SignUp
             ),
             Positioned(
+                key: Key("SignInGoogle"),
                 left: 810.0,
                 top: 700,
                 height: 50,
@@ -101,6 +104,7 @@ class GeneratedIPhoneXRXSMax111Widget extends StatelessWidget {
               width: 339.0,
               height: 60.0,
               child: MaterialButton(
+                  key: Key("Login"),
                   child: GeneratedGroup1Widget(),
                   onPressed: () {
                     Navigator.pushNamed(context, '/GeneratedLogInviewWidget');

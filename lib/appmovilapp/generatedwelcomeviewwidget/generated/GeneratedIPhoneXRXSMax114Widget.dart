@@ -137,13 +137,14 @@ class GeneratedIPhoneXRXSMax114Widget extends StatelessWidget {
               child: GeneratedGroup13Widget(),
             ),
             Positioned(
+              key: Key("Close"),
               left: 371.4280090332031,
               top: 268.0,
               right: null,
               bottom: null,
               width: 17.0,
               height: 26.0,
-              child: GeneratedXWidget(),
+              child: GeneratedXWidget(), //X
             )
           ]),
     );
