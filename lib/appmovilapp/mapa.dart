@@ -20,11 +20,13 @@ class Mapa extends StatefulWidget {
   final int zoom;
   final String searchFor;
   final ValueChanged<bool> routing;
+  final ValueChanged<Set<Marker>> marks;
   final bool offRoute;
 
   const Mapa({
     Key key,
     this.routing,
+    this.marks,
     this.searchFor,
     this.center,
     this.zoom,
@@ -379,6 +381,8 @@ class _Mapa extends State<Mapa> {
                   }
                 },
               ),
+              widget.marks(Set()),
+              print(widget.marks)
             }));
   }
 

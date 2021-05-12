@@ -187,12 +187,13 @@ class _GeneratedIPhoneXRXSMax1110WidgetState
             child: Stack(
           children: [
             Mapa(
+              key: Key("Mapa"),
               searchFor: this.namePlace,
               routing: _setRouting,
               offRoute: this.routing,
               center: LatLng(11.0040, -74.8071),
-              zoom: 50,
-              //markers: _markers,
+              zoom: 13,
+              markers: Set(),
             ),
             routing
                 ? Positioned(

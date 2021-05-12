@@ -22,6 +22,7 @@ import 'package:flutterapp/appmovilapp/generatedsignupviewwidget/userCreationGoo
 import 'package:flutterapp/appmovilapp/generatedunfilteredviewwidget/generated/GeneratedIPhoneXRXSMax1110Widget.dart';
 import 'package:flutterapp/appmovilapp/generatedweatherviewwidget/generated/GeneratedIPhoneXRXSMax119Widget.dart';
 import 'package:flutterapp/appmovilapp/generatedwelcomeviewwidget/GeneratedWelcomeviewWidget.dart';
+import 'package:flutterapp/appmovilapp/mapa.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:mockito/mockito.dart';
@@ -128,7 +129,12 @@ Future<void> main() async {
       await tester.pumpAndSettle(Duration(seconds: 5));
       await tester.tap(find.descendant(
           of: find.byKey(Key("Close")), matching: find.byKey(Key("Cerrar"))));
-      await tester.pumpAndSettle(Duration(seconds: 60));
+      await tester.pumpAndSettle(Duration(seconds: 20));
+      Mapa map = find.byKey(Key("Mapa")).evaluate().first.widget;
+      print(map.marks);
+      print(map.markers.elementAt(2).markerId);
+      map.markers.elementAt(2).onTap();
+      await tester.pumpAndSettle(Duration(seconds: 5));
     });
 
     /// Build our app and trigger a frame.
