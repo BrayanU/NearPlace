@@ -18,6 +18,7 @@ class Mapa extends StatefulWidget {
   final LatLng center;
   final Set<Marker> markers;
   final int zoom;
+  final Set<Marker> allMarks;
   final String searchFor;
   final ValueChanged<bool> routing;
   final ValueChanged<Set<Marker>> marks;
@@ -32,6 +33,7 @@ class Mapa extends StatefulWidget {
     this.zoom,
     this.markers,
     this.offRoute,
+    this.allMarks,
   }) : super(key: key);
 
   @override
@@ -228,28 +230,13 @@ class _Mapa extends State<Mapa> {
               for (var word in json.decode(value.body)['results'])
                 {
                   //print(word),
-                  if (word.containsKey('opening_hours') &&
-                      word['opening_hours']['open_now'])
+                  if (word.containsKey(
+                      'opening_hours') /*  &&
+                      word['opening_hours']['open_now'] */
+                  )
                     {
                       pc = new nearPlaces(),
                       pc.name = word['name'],
-                      /* places
-                          .where('name', isEqualTo: pc.name)
-                          .get()
-                          .then((value) async => {
-                                print(pc.name),
-                                if (value.docs.isEmpty)
-                                  {
-                                    /* await places.add({
-                                      'name': pc.name,
-                                      'rating': 0.0,
-                                    }) */
-                                  }
-                                else
-                                  {
-                                    //nothing
-                                  }
-                              }), */
                       print(word['types']),
                       if (word['types'].length >= 3)
                         {
@@ -322,21 +309,6 @@ class _Mapa extends State<Mapa> {
                                                                   .fromJson(value
                                                                       .data()))
                                                           .toList(),
-                                                      /* for (var rws
-                                                          in rwdata.docs)
-                                                        {
-                                                          print(rws.data()),
-                                                          rw.userName =
-                                                              rws.data()[
-                                                                  'userName'],
-                                                          rw.rate = rws
-                                                              .data()['rate'],
-                                                          rw.description =
-                                                              rws.data()[
-                                                                      'text'] ??
-                                                                  " ",
-                                                          _reviews.add(rw),
-                                                        }, */
                                                     },
                                                   await user
                                                       .where('userId',
@@ -381,7 +353,10 @@ class _Mapa extends State<Mapa> {
                   }
                 },
               ),
-              widget.marks(Set()),
+              setState(() {
+                print("THIS IS NULL${_markers.length}");
+                widget.marks(_markers);
+              }),
               print(widget.marks)
             }));
   }
@@ -445,7 +420,7 @@ class _Mapa extends State<Mapa> {
                   ? GeneratedIPhoneXRXSMax117Widget(
                       setFalse: _setFalse,
                       setRoute: checkRoute,
-                      key: _keyChild1,
+                      key: Key("PlaceDetails"),
                       title: this.childTitle,
                       setTrue: _setFalse,
                       review: _reviews,
@@ -457,7 +432,9 @@ class _Mapa extends State<Mapa> {
               height: 700,
               child: _review
                   ? GeneratedIPhoneXRXSMax118Widget(
-                      setTrue: _setReview, placeName: this.childTitle.name)
+                      key: Key("Review"),
+                      setTrue: _setReview,
+                      placeName: this.childTitle.name)
                   : null)
         ])
       ],

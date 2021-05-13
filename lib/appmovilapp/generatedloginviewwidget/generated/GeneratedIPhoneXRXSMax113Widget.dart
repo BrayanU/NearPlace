@@ -81,6 +81,7 @@ class GeneratedIPhoneXRXSMax113Widget extends StatelessWidget {
                 child: Stack(
                   children: [
                     Positioned(
+                      key: Key("Email"),
                       left: 791.0,
                       top: 470.0,
                       right: null,
@@ -91,6 +92,7 @@ class GeneratedIPhoneXRXSMax113Widget extends StatelessWidget {
                           onSaved: (value) => lif.email = value), //Email
                     ),
                     Positioned(
+                      key: Key("Password"),
                       left: 791.0,
                       top: 555.0,
                       right: null,
@@ -108,6 +110,7 @@ class GeneratedIPhoneXRXSMax113Widget extends StatelessWidget {
                       width: 339.0,
                       height: 60.0,
                       child: MaterialButton(
+                          key: Key("Login"),
                           onPressed: () async {
                             _formKey.currentState.save();
                             if (_formKey.currentState.validate()) {

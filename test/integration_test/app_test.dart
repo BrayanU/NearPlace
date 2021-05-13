@@ -8,10 +8,12 @@
 //COMMAND: flutter drive --driver test/integration_test/driver.dart --target test/integration_test/app_test.dart
 
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutterapp/appmovilapp/generateddetailsplaceviewwidget/GeneratedDetailsplaceviewWidget.dart';
 import 'package:flutterapp/appmovilapp/generatedfilteredviewwidget/GeneratedFilteredviewWidget.dart';
 import 'package:flutterapp/appmovilapp/generatedloginviewwidget/GeneratedLogInviewWidget.dart';
+import 'package:flutterapp/appmovilapp/generatedloginviewwidget/generated/GeneratedIPhoneXRXSMax113Widget.dart';
 import 'package:flutterapp/appmovilapp/generatedoptionsviewwidget/GeneratedOptionsviewWidget.dart';
 import 'package:flutterapp/appmovilapp/generatedprimeraviewwidget/GeneratedPrimeraviewWidget.dart';
 import 'package:flutterapp/appmovilapp/generatedreviewviewwidget/GeneratedReviewviewWidget.dart';
@@ -69,6 +71,7 @@ final mockObserver = MockNavigatorObserver();
 Future<Widget> createHomeScreen() async {
   WidgetsFlutterBinding.ensureInitialized();
   return MaterialApp(
+    debugShowCheckedModeBanner: false,
     home: mainPage.appMovilApp(),
     navigatorObservers: [mockObserver],
     navigatorKey: navigatorKey,
@@ -110,7 +113,7 @@ Future<void> main() async {
       await tester.pumpWidget(w);
       await tester.pumpAndSettle(Duration(seconds: 5));
 
-      await tester.press(find.byKey(Key("SignUpEmail")));
+      //await tester.press(find.byKey(Key("SignUpEmail")));
       await tester.pumpAndSettle(Duration(seconds: 5));
       navigatorKey.currentState.push(MaterialPageRoute(
         builder: (context) => Material(
@@ -118,6 +121,9 @@ Future<void> main() async {
       ));
 
       await tester.pumpAndSettle(Duration(seconds: 5));
+
+      //First User
+
       await tester.enterText(find.byKey(Key("Email")), 'testingUser@gmail.com');
       await tester.enterText(find.byKey(Key("Name")), 'testingUser');
       await tester.enterText(find.byKey(Key("Password")), '123456');
@@ -131,9 +137,194 @@ Future<void> main() async {
           of: find.byKey(Key("Close")), matching: find.byKey(Key("Cerrar"))));
       await tester.pumpAndSettle(Duration(seconds: 20));
       Mapa map = find.byKey(Key("Mapa")).evaluate().first.widget;
-      print(map.marks);
-      print(map.markers.elementAt(2).markerId);
-      map.markers.elementAt(2).onTap();
+      await map.allMarks.elementAt(0).onTap();
+      await tester.pumpAndSettle(Duration(seconds: 5));
+      await tester.tap(find.descendant(
+          of: find.byKey(Key("PlaceDetails")),
+          matching: find.byKey(Key("Fav"))));
+      await tester.pumpAndSettle(Duration(seconds: 5));
+      await tester.tap(find.descendant(
+          of: find.byKey(Key("PlaceDetails")),
+          matching: find.byKey(Key("MakeReview"))));
+      await tester.pumpAndSettle(Duration(seconds: 5));
+      await tester.enterText(
+          find.descendant(
+              of: find.byKey(Key("Review")),
+              matching: find.byKey(Key("Reseña"))),
+          "It was not a good place");
+      await tester.tapAt(Offset(70, 500)); //0.5
+      //await tester.tapAt(Offset(280, 500)); // 5
+      /* await tester.drag(
+          find.descendant(
+              of: find.byKey(Key("Review")),
+              matching: find.byKey(Key("Rating"))),
+          Offset(-50, 0)); */
+      await tester.pumpAndSettle(Duration(seconds: 5));
+      btn = await find
+          .descendant(
+              of: find.byKey(Key("Review")),
+              matching: find.byKey(Key("Aceptar")))
+          .evaluate()
+          .first
+          .widget;
+      btn.onPressed();
+      await tester.pumpAndSettle(Duration(seconds: 5));
+      var drawer = find.byTooltip('Open navigation menu');
+      await tester.tap(drawer);
+      drawer.allCandidates.forEach((element) {
+        print(element.widget.key);
+      });
+      await tester.pumpAndSettle(Duration(seconds: 5));
+      btn = await find.byKey(Key("LogOut")).evaluate().first.widget;
+      btn.onPressed();
+
+      //Second User
+
+      await tester.pumpAndSettle(Duration(seconds: 5));
+      navigatorKey.currentState.push(MaterialPageRoute(
+        builder: (context) => Material(
+            child: GeneratedIPhoneXRXSMax112Widget()), //Emulating navigation
+      ));
+
+      await tester.pumpAndSettle(Duration(seconds: 5));
+      await tester.enterText(
+          find.byKey(Key("Email")), 'testingUser+1@gmail.com');
+      await tester.enterText(find.byKey(Key("Name")), 'testingUser');
+      await tester.enterText(find.byKey(Key("Password")), '123456');
+      await tester.enterText(find.byKey(Key("Celular")), '300000');
+      await tester.pumpAndSettle(Duration(seconds: 5));
+      btn = find.byKey(Key("Registrar")).evaluate().first.widget;
+      btn.onPressed();
+      verify(mockObserver.didPush(any, any));
+      await tester.pumpAndSettle(Duration(seconds: 5));
+      await tester.tap(find.descendant(
+          of: find.byKey(Key("Close")), matching: find.byKey(Key("Cerrar"))));
+      await tester.pumpAndSettle(Duration(seconds: 20));
+      map = find.byKey(Key("Mapa")).evaluate().first.widget;
+      await map.allMarks.elementAt(0).onTap();
+      await tester.pumpAndSettle(Duration(seconds: 5));
+      await tester.tap(find.descendant(
+          of: find.byKey(Key("PlaceDetails")),
+          matching: find.byKey(Key("Fav"))));
+      await tester.pumpAndSettle(Duration(seconds: 5));
+      await tester.tap(find.descendant(
+          of: find.byKey(Key("PlaceDetails")),
+          matching: find.byKey(Key("MakeReview"))));
+      await tester.pumpAndSettle(Duration(seconds: 5));
+      await tester.enterText(
+          find.descendant(
+              of: find.byKey(Key("Review")),
+              matching: find.byKey(Key("Reseña"))),
+          "It was not a good place");
+      await tester.tapAt(Offset(70, 500)); //0.5
+      //await tester.tapAt(Offset(280, 500)); // 5
+      /* await tester.drag(
+          find.descendant(
+              of: find.byKey(Key("Review")),
+              matching: find.byKey(Key("Rating"))),
+          Offset(-50, 0)); */
+      await tester.pumpAndSettle(Duration(seconds: 5));
+      btn = await find
+          .descendant(
+              of: find.byKey(Key("Review")),
+              matching: find.byKey(Key("Aceptar")))
+          .evaluate()
+          .first
+          .widget;
+      btn.onPressed();
+      await tester.pumpAndSettle(Duration(seconds: 5));
+      drawer = find.byTooltip('Open navigation menu');
+      await tester.tap(drawer);
+      drawer.allCandidates.forEach((element) {
+        print(element.widget.key);
+      });
+      await tester.pumpAndSettle(Duration(seconds: 5));
+      btn = await find.byKey(Key("LogOut")).evaluate().first.widget;
+      btn.onPressed();
+
+      //Third user
+
+      await tester.pumpAndSettle(Duration(seconds: 5));
+      navigatorKey.currentState.push(MaterialPageRoute(
+        builder: (context) => Material(
+            child: GeneratedIPhoneXRXSMax112Widget()), //Emulating navigation
+      ));
+
+      await tester.pumpAndSettle(Duration(seconds: 5));
+      await tester.enterText(
+          find.byKey(Key("Email")), 'testingUser+2@gmail.com');
+      await tester.enterText(find.byKey(Key("Name")), 'testingUser');
+      await tester.enterText(find.byKey(Key("Password")), '123456');
+      await tester.enterText(find.byKey(Key("Celular")), '300000');
+      await tester.pumpAndSettle(Duration(seconds: 5));
+      btn = find.byKey(Key("Registrar")).evaluate().first.widget;
+      btn.onPressed();
+      verify(mockObserver.didPush(any, any));
+      await tester.pumpAndSettle(Duration(seconds: 5));
+      await tester.tap(find.descendant(
+          of: find.byKey(Key("Close")), matching: find.byKey(Key("Cerrar"))));
+      await tester.pumpAndSettle(Duration(seconds: 20));
+      map = find.byKey(Key("Mapa")).evaluate().first.widget;
+      await map.allMarks.elementAt(0).onTap();
+      await tester.pumpAndSettle(Duration(seconds: 5));
+      await tester.tap(find.descendant(
+          of: find.byKey(Key("PlaceDetails")),
+          matching: find.byKey(Key("Fav"))));
+      await tester.pumpAndSettle(Duration(seconds: 5));
+      await tester.tap(find.descendant(
+          of: find.byKey(Key("PlaceDetails")),
+          matching: find.byKey(Key("MakeReview"))));
+      await tester.pumpAndSettle(Duration(seconds: 5));
+      await tester.enterText(
+          find.descendant(
+              of: find.byKey(Key("Review")),
+              matching: find.byKey(Key("Reseña"))),
+          "It was not a good place");
+      //await tester.tapAt(Offset(70, 500)); //0.5
+      await tester.tapAt(Offset(280, 500)); // 5
+      /* await tester.drag(
+          find.descendant(
+              of: find.byKey(Key("Review")),
+              matching: find.byKey(Key("Rating"))),
+          Offset(-50, 0)); */
+      await tester.pumpAndSettle(Duration(seconds: 5));
+      btn = await find
+          .descendant(
+              of: find.byKey(Key("Review")),
+              matching: find.byKey(Key("Aceptar")))
+          .evaluate()
+          .first
+          .widget;
+      btn.onPressed();
+      await tester.pumpAndSettle(Duration(seconds: 5));
+      drawer = find.byTooltip('Open navigation menu');
+      await tester.tap(drawer);
+      drawer.allCandidates.forEach((element) {
+        print(element.widget.key);
+      });
+      await tester.pumpAndSettle(Duration(seconds: 5));
+      btn = await find.byKey(Key("LogOut")).evaluate().first.widget;
+      btn.onPressed();
+
+      //FirstUserlogin
+
+      await tester.pumpAndSettle(Duration(seconds: 5));
+      navigatorKey.currentState.push(MaterialPageRoute(
+        builder: (context) => Material(
+            child: GeneratedIPhoneXRXSMax113Widget()), //Emulating navigation
+      ));
+      await tester.pumpAndSettle(Duration(seconds: 5));
+      await tester.enterText(find.byKey(Key("Email")), 'testingUser@gmail.com');
+      await tester.enterText(find.byKey(Key("Password")), '123456');
+      await tester.pumpAndSettle(Duration(seconds: 5));
+      btn = find.byKey(Key("Login")).evaluate().first.widget;
+      btn.onPressed();
+      await tester.pumpAndSettle(Duration(seconds: 5));
+      await tester.tap(find.descendant(
+          of: find.byKey(Key("Close")), matching: find.byKey(Key("Cerrar"))));
+      await tester.pumpAndSettle(Duration(seconds: 20));
+      map = find.byKey(Key("Mapa")).evaluate().first.widget;
+      await map.allMarks.elementAt(0).onTap();
       await tester.pumpAndSettle(Duration(seconds: 5));
     });
 

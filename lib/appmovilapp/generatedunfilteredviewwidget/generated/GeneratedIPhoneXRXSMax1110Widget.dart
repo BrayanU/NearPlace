@@ -38,6 +38,14 @@ class _GeneratedIPhoneXRXSMax1110WidgetState
   String tmpName;
   double temperature;
   String desc;
+  Set<Marker> markersTotal;
+  GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey();
+
+  Set<Marker> _nothing(Set<Marker> a) {
+    setState(() {
+      markersTotal = a;
+    });
+  }
 
   bool _setRouting(bool sw) {
     setState(() {
@@ -103,6 +111,7 @@ class _GeneratedIPhoneXRXSMax1110WidgetState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: scaffoldKey,
         appBar: AppBar(
           title: searching
               ? Row(children: [
@@ -155,6 +164,7 @@ class _GeneratedIPhoneXRXSMax1110WidgetState
                 },
               ),
               MaterialButton(
+                  key: Key("Weather"),
                   child: Text("Weather"),
                   onPressed: () async {
                     await _determinePosition().then((value) async => {
@@ -166,6 +176,7 @@ class _GeneratedIPhoneXRXSMax1110WidgetState
                         });
                   }),
               MaterialButton(
+                key: Key("LogOut"),
                 child: Text("Sign Out"),
                 onPressed: () async {
                   print(FirebaseAuth.instance.currentUser);
@@ -188,12 +199,13 @@ class _GeneratedIPhoneXRXSMax1110WidgetState
           children: [
             Mapa(
               key: Key("Mapa"),
+              marks: _nothing,
+              allMarks: this.markersTotal,
               searchFor: this.namePlace,
               routing: _setRouting,
               offRoute: this.routing,
               center: LatLng(11.0040, -74.8071),
               zoom: 13,
-              markers: Set(),
             ),
             routing
                 ? Positioned(

@@ -214,6 +214,7 @@ class GeneratedIPhoneXRXSMax117WidgetState
                     top: 40,
                     left: 280,
                     child: FavoriteButton(
+                      key: Key("Fav"),
                       isFavorite: widget.isFav,
                       iconSize: 40,
                       valueChanged: (valueFav) async {
@@ -406,9 +407,9 @@ class GeneratedIPhoneXRXSMax117WidgetState
                   width: 69.0,
                   height: 29.0,
                   child: GestureDetector(
+                    key: Key("MakeReview"),
                     child: GeneratedGroup21Widget1(),
                     onTap: () {
-                      //Navigator.pushNamed(context, "/GeneratedReviewviewWidget");
                       widget.setTrue(true);
                     },
                   ),
@@ -419,18 +420,16 @@ class GeneratedIPhoneXRXSMax117WidgetState
                     width: 69,
                     height: 29,
                     child: GestureDetector(
-                      child:  MaterialButton(
-                      color: Colors.orange,
-                      child: Text("Go",
-                      style: new TextStyle(
-                            fontSize: 20,
-                            color: Colors.white
-                          )),
-                      onPressed: () {
-                        widget.setRoute(true);
-                        widget.setFalse(false);
-                      }),
-                    ))
+                        child: MaterialButton(
+                            color: Colors.orange,
+                            child: Text("Go",
+                                style: new TextStyle(
+                                    fontSize: 20, color: Colors.white)),
+                            onPressed: () {}),
+                        onTap: () {
+                          widget.setRoute(true);
+                          widget.setFalse(false);
+                        }))
               ],
             )
           ]),

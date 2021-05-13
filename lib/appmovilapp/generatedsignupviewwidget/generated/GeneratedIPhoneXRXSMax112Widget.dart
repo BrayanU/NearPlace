@@ -61,7 +61,8 @@ class GeneratedIPhoneXRXSMax112Widget extends StatelessWidget {
           "name": name.toString().trim(),
           "emailAddress": email.toString().trim(),
           "phoneNumber": phone,
-          "userId": uid
+          "userId": uid,
+          "favPlaces": []
         })
         .then((value) => print("User added to db " + value.toString()))
         .catchError((error) => print("Failed to add user: $error"));
