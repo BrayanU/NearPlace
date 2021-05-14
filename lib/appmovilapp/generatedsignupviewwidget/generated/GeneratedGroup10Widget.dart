@@ -28,6 +28,7 @@ class GeneratedGroup10Widget extends StatelessWidget {
               width: 324.0,
               height: 50.0,
               child: TextFormField(
+                key: Key("Password"),
                 //controller: this.controllerPassword,
                 decoration: InputDecoration(
                     labelText: "Password",

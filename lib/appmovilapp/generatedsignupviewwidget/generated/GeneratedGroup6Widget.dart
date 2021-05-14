@@ -26,6 +26,7 @@ class GeneratedGroup6Widget extends StatelessWidget {
               width: 324.0,
               height: 50.0,
               child: TextFormField(
+                key: Key("PhoneNumber"),
                 keyboardType: TextInputType.phone,
                 //controller: this.controllerEmail,
                 decoration: InputDecoration(

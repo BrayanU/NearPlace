@@ -61,7 +61,8 @@ class GeneratedIPhoneXRXSMax112Widget extends StatelessWidget {
           "name": name.toString().trim(),
           "emailAddress": email.toString().trim(),
           "phoneNumber": phone,
-          "userId": uid
+          "userId": uid,
+          "favPlaces": []
         })
         .then((value) => print("User added to db " + value.toString()))
         .catchError((error) => print("Failed to add user: $error"));
@@ -126,6 +127,7 @@ class GeneratedIPhoneXRXSMax112Widget extends StatelessWidget {
                 key: _formKey,
                 child: Stack(children: [
                   Positioned(
+                    key: Key("Name"),
                     left: 67.0,
                     top: 325.0,
                     right: null,
@@ -138,6 +140,7 @@ class GeneratedIPhoneXRXSMax112Widget extends StatelessWidget {
                             }), //Nombre
                   ),
                   Positioned(
+                    key: Key("Email"),
                     left: 67.0,
                     top: 402.0,
                     right: null,
@@ -150,6 +153,7 @@ class GeneratedIPhoneXRXSMax112Widget extends StatelessWidget {
                             }), //Correo
                   ),
                   Positioned(
+                    key: Key("Celular"),
                     left: 67.0,
                     top: 479.0,
                     right: null,
@@ -163,6 +167,7 @@ class GeneratedIPhoneXRXSMax112Widget extends StatelessWidget {
                             }), //Celular
                   ),
                   Positioned(
+                    key: Key("Password"),
                     left: 67.0,
                     top: 556.0,
                     right: null,
@@ -175,6 +180,7 @@ class GeneratedIPhoneXRXSMax112Widget extends StatelessWidget {
                             }), //Password
                   ),
                   Positioned(
+//                    key: Key("Registrar"),
                     left: 60.0,
                     top: 725.0,
                     right: null,
@@ -182,6 +188,7 @@ class GeneratedIPhoneXRXSMax112Widget extends StatelessWidget {
                     width: 339.0,
                     height: 60.0,
                     child: MaterialButton(
+                        key: Key("Registrar"),
                         onPressed: () async {
                           _formKey.currentState.save();
                           if (_formKey.currentState.validate() &&

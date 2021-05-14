@@ -7,6 +7,7 @@ class GeneratedXWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      key: Key("Cerrar"),
       onTap: () =>
           Navigator.pushNamed(context, '/GeneratedUnfilteredviewWidget'),
       child: Text(

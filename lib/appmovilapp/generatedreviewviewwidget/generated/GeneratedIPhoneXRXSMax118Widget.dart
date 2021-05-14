@@ -243,6 +243,7 @@ class _GeneratedIPhoneXRXSMax118WidgetState
               width: 294.0,
               height: 256.0,
               child: TextField(
+                key: Key("Reseña"),
                 maxLines: 10,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -271,6 +272,7 @@ class _GeneratedIPhoneXRXSMax118WidgetState
               width: 271.0,
               height: 45.0,
               child: MaterialButton(
+                key: Key("Aceptar"),
                 child: GeneratedGroup23Widget(),
                 onPressed: () async {
                   print(rf.text);
@@ -306,6 +308,7 @@ class _GeneratedIPhoneXRXSMax118WidgetState
             Positioned(
                 top: 400,
                 left: 60,
+                key: Key("Rating"),
                 child: RatingBar.builder(
                   initialRating: 3,
                   minRating: 0.5,

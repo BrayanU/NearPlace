@@ -8,6 +8,8 @@ import 'package:flutterapp/appmovilapp/generatedreviewviewwidget/generated/Gener
 import 'package:flutterapp/appmovilapp/generatedunfilteredviewwidget/generated/GeneratedIPhoneXRXSMax1110Widget.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:http/http.dart' as http;
 
 import 'generateddetailsplaceviewwidget/generated/GeneratedIPhoneXRXSMax117Widget.dart';
@@ -16,14 +18,22 @@ class Mapa extends StatefulWidget {
   final LatLng center;
   final Set<Marker> markers;
   final int zoom;
+  final Set<Marker> allMarks;
   final String searchFor;
+  final ValueChanged<bool> routing;
+  final ValueChanged<Set<Marker>> marks;
+  final bool offRoute;
 
   const Mapa({
     Key key,
+    this.routing,
+    this.marks,
     this.searchFor,
     this.center,
     this.zoom,
     this.markers,
+    this.offRoute,
+    this.allMarks,
   }) : super(key: key);
 
   @override
@@ -95,12 +105,17 @@ Future<Position> _determinePosition() async {
 }
 
 class _Mapa extends State<Mapa> {
+  PolylinePoints polylinePoints;
+  Set<Polyline> polylines = {};
+  Set<Polyline> emptyPoly = {};
+  List<LatLng> polylineCoordinates = [];
   bool _bool = false;
   bool _review = false;
   List<reviewsObj> _reviews = [];
   GoogleMapController mapController;
   Set<Marker> _markers;
   Set<Marker> _marker;
+  Set<Marker> _route;
   LatLng _center;
   int _zoom;
   bool _isFav;
@@ -118,11 +133,68 @@ class _Mapa extends State<Mapa> {
   void initState() {
     _markers = Set();
     _marker = Set();
+    _route = Set();
+    polylines = Set();
+    emptyPoly = Set();
     _isFav = false;
     _initMarkers();
     childTitle = new nearPlaces();
     _center = widget.center;
     _zoom = widget.zoom;
+  }
+
+  // Create the polylines for showing the route between two places
+  Future<bool> _createPolylines(Position start, Position destination) async {
+    polylinePoints = PolylinePoints();
+    await polylinePoints
+        .getRouteBetweenCoordinates(
+          'AIzaSyCYrOoham5IJ0r3L_S80mpUPftWqxOuuZ0',
+          PointLatLng(start.latitude, start.longitude),
+          PointLatLng(destination.latitude, destination.longitude),
+          travelMode: TravelMode.driving,
+        )
+        .then((value) => setState(() {
+              if (value.points.isNotEmpty) {
+                value.points.forEach((PointLatLng point) {
+                  polylineCoordinates
+                      .add(LatLng(point.latitude, point.longitude));
+                });
+              }
+              PolylineId id = PolylineId('poly');
+              Polyline polyline = Polyline(
+                polylineId: id,
+                color: Colors.blue,
+                points: polylineCoordinates,
+                width: 3,
+              );
+              polylines.add(polyline);
+            }));
+    return true;
+  }
+
+  _makeaRoute() async {
+    Marker startMarker, destinationMarker;
+
+    await Geolocator.getCurrentPosition().then((value) async => {
+          startMarker = Marker(
+              markerId: MarkerId('${value.latitude}'),
+              position: LatLng(value.latitude, value.longitude)),
+          destinationMarker = Marker(
+              markerId: MarkerId("${this.childTitle.name}"),
+              position: this.childTitle.location),
+          await _createPolylines(
+                  value,
+                  Position(
+                      latitude: this.childTitle.location.latitude,
+                      longitude: this.childTitle.location.longitude))
+              .then((value) => {
+                    setState(() {
+                      _route.add(startMarker);
+                      _route.add(destinationMarker);
+                    })
+                  }),
+        });
+    return true;
   }
 
   _setFalse(bool sw) {
@@ -158,28 +230,13 @@ class _Mapa extends State<Mapa> {
               for (var word in json.decode(value.body)['results'])
                 {
                   //print(word),
-                  if (word.containsKey('opening_hours') &&
-                      word['opening_hours']['open_now'])
+                  if (word.containsKey(
+                      'opening_hours') /*  &&
+                      word['opening_hours']['open_now'] */
+                  )
                     {
                       pc = new nearPlaces(),
                       pc.name = word['name'],
-                      /* places
-                          .where('name', isEqualTo: pc.name)
-                          .get()
-                          .then((value) async => {
-                                print(pc.name),
-                                if (value.docs.isEmpty)
-                                  {
-                                    /* await places.add({
-                                      'name': pc.name,
-                                      'rating': 0.0,
-                                    }) */
-                                  }
-                                else
-                                  {
-                                    //nothing
-                                  }
-                              }), */
                       print(word['types']),
                       if (word['types'].length >= 3)
                         {
@@ -252,21 +309,6 @@ class _Mapa extends State<Mapa> {
                                                                   .fromJson(value
                                                                       .data()))
                                                           .toList(),
-                                                      /* for (var rws
-                                                          in rwdata.docs)
-                                                        {
-                                                          print(rws.data()),
-                                                          rw.userName =
-                                                              rws.data()[
-                                                                  'userName'],
-                                                          rw.rate = rws
-                                                              .data()['rate'],
-                                                          rw.description =
-                                                              rws.data()[
-                                                                      'text'] ??
-                                                                  " ",
-                                                          _reviews.add(rw),
-                                                        }, */
                                                     },
                                                   await user
                                                       .where('userId',
@@ -311,12 +353,16 @@ class _Mapa extends State<Mapa> {
                   }
                 },
               ),
+              setState(() {
+                print("THIS IS NULL${_markers.length}");
+                widget.marks(_markers);
+              }),
+              print(widget.marks)
             }));
   }
 
-  bool checkSearch(String searchFor) {
+  checkSearch(String searchFor) {
     if (searchFor.trim().isNotEmpty) {
-      print("Did I make it? ${_markers.length}");
       _marker.clear();
       for (var pc in _places) {
         if (pc.name.toLowerCase().contains(searchFor.toLowerCase())) {
@@ -329,6 +375,23 @@ class _Mapa extends State<Mapa> {
       return true;
     }
     return false;
+  }
+
+  checkRoute(bool sw) {
+    if (sw) {
+      setState(() {
+        polylines.clear();
+        _route.clear();
+        polylineCoordinates.clear();
+      });
+      _makeaRoute().then((v) async {
+        print(v);
+        setState(() {
+          print(polylines.length);
+          widget.routing(true);
+        });
+      });
+    }
   }
 
   @override
@@ -344,8 +407,10 @@ class _Mapa extends State<Mapa> {
             target: _center,
             zoom: _zoom.toDouble(),
           ),
-          markers: (checkSearch(widget.searchFor)) ? _marker : _markers,
-          // polylines: _polyline,
+          markers: widget.offRoute
+              ? _route
+              : ((checkSearch(widget.searchFor)) ? _marker : _markers),
+          polylines: widget.offRoute ? polylines : emptyPoly,
         ),
         Stack(children: [
           Container(
@@ -354,7 +419,8 @@ class _Mapa extends State<Mapa> {
               child: _bool
                   ? GeneratedIPhoneXRXSMax117Widget(
                       setFalse: _setFalse,
-                      key: _keyChild1,
+                      setRoute: checkRoute,
+                      key: Key("PlaceDetails"),
                       title: this.childTitle,
                       setTrue: _setFalse,
                       review: _reviews,
@@ -366,7 +432,9 @@ class _Mapa extends State<Mapa> {
               height: 700,
               child: _review
                   ? GeneratedIPhoneXRXSMax118Widget(
-                      setTrue: _setReview, placeName: this.childTitle.name)
+                      key: Key("Review"),
+                      setTrue: _setReview,
+                      placeName: this.childTitle.name)
                   : null)
         ])
       ],
