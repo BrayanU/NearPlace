@@ -107,7 +107,7 @@ Future<void> main() async {
       as IntegrationTestWidgetsFlutterBinding;
   group("description", () {
     binding.framePolicy = LiveTestWidgetsFlutterBindingFramePolicy.fullyLive;
-    testWidgets("Register, Map and Reviews, User 1", (tester) async {
+    testWidgets("description", (tester) async {
       await Firebase.initializeApp();
       Widget w = await createHomeScreen();
       await tester.pumpWidget(w);
@@ -178,23 +178,6 @@ Future<void> main() async {
       btn = await find.byKey(Key("LogOut")).evaluate().first.widget;
       btn.onPressed();
 
-
-    });
-
-    testWidgets("Register, Map and Reviews, User 2", (tester) async {
-      await Firebase.initializeApp();
-      Widget w = await createHomeScreen();
-      await tester.pumpWidget(w);
-      await tester.pumpAndSettle(Duration(seconds: 5));
-      MaterialButton btn = find.byKey(Key("Registrar")).evaluate().first.widget;
-      //await tester.press(find.byKey(Key("SignUpEmail")));
-      await tester.pumpAndSettle(Duration(seconds: 5));
-      navigatorKey.currentState.push(MaterialPageRoute(
-        builder: (context) => Material(
-            child: GeneratedIPhoneXRXSMax112Widget()), //Emulating navigation
-      ));
-      Mapa map = find.byKey(Key("Mapa")).evaluate().first.widget;
-      await tester.pumpAndSettle(Duration(seconds: 5));
       //Second User
 
       await tester.pumpAndSettle(Duration(seconds: 5));
@@ -250,7 +233,7 @@ Future<void> main() async {
           .widget;
       btn.onPressed();
       await tester.pumpAndSettle(Duration(seconds: 5));
-      var drawer = find.byTooltip('Open navigation menu');
+      drawer = find.byTooltip('Open navigation menu');
       await tester.tap(drawer);
       drawer.allCandidates.forEach((element) {
         print(element.widget.key);
@@ -258,23 +241,9 @@ Future<void> main() async {
       await tester.pumpAndSettle(Duration(seconds: 5));
       btn = await find.byKey(Key("LogOut")).evaluate().first.widget;
       btn.onPressed();
-    });
-    testWidgets("Register, Map and Reviews, User 3", (tester) async {
-      await Firebase.initializeApp();
-      Widget w = await createHomeScreen();
-      await tester.pumpWidget(w);
-      await tester.pumpAndSettle(Duration(seconds: 5));
-      MaterialButton btn = find.byKey(Key("Registrar")).evaluate().first.widget;
-      //await tester.press(find.byKey(Key("SignUpEmail")));
-      await tester.pumpAndSettle(Duration(seconds: 5));
-      navigatorKey.currentState.push(MaterialPageRoute(
-        builder: (context) => Material(
-            child: GeneratedIPhoneXRXSMax112Widget()), //Emulating navigation
-      ));
 
-      await tester.pumpAndSettle(Duration(seconds: 5));
       //Third user
-      Mapa map = find.byKey(Key("Mapa")).evaluate().first.widget;
+
       await tester.pumpAndSettle(Duration(seconds: 5));
       navigatorKey.currentState.push(MaterialPageRoute(
         builder: (context) => Material(
@@ -328,7 +297,7 @@ Future<void> main() async {
           .widget;
       btn.onPressed();
       await tester.pumpAndSettle(Duration(seconds: 5));
-      var drawer = find.byTooltip('Open navigation menu');
+      drawer = find.byTooltip('Open navigation menu');
       await tester.tap(drawer);
       drawer.allCandidates.forEach((element) {
         print(element.widget.key);
@@ -336,27 +305,9 @@ Future<void> main() async {
       await tester.pumpAndSettle(Duration(seconds: 5));
       btn = await find.byKey(Key("LogOut")).evaluate().first.widget;
       btn.onPressed();
-    });
 
-
-
-    testWidgets("Login User 1, checking information", (tester) async {
-      await Firebase.initializeApp();
-      Widget w = await createHomeScreen();
-      await tester.pumpWidget(w);
-      await tester.pumpAndSettle(Duration(seconds: 5));
-
-      //await tester.press(find.byKey(Key("SignUpEmail")));
-      await tester.pumpAndSettle(Duration(seconds: 5));
-      navigatorKey.currentState.push(MaterialPageRoute(
-        builder: (context) => Material(
-            child: GeneratedIPhoneXRXSMax112Widget()), //Emulating navigation
-      ));
-
-      await tester.pumpAndSettle(Duration(seconds: 5));
-      Mapa map = find.byKey(Key("Mapa")).evaluate().first.widget;
       //FirstUserlogin
-      MaterialButton btn = find.byKey(Key("Registrar")).evaluate().first.widget;
+
       await tester.pumpAndSettle(Duration(seconds: 5));
       navigatorKey.currentState.push(MaterialPageRoute(
         builder: (context) => Material(
