@@ -192,7 +192,10 @@ class _GeneratedIPhoneXRXSMax1110WidgetState
             children: [
               MaterialButton(
                 key: Key("Search"),
-                child: Text("Search"),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children:[Icon(Icons.search)]
+                  ),
                 onPressed: () {
                   setState(() {
                     searching = true;
@@ -202,7 +205,10 @@ class _GeneratedIPhoneXRXSMax1110WidgetState
               ),
               MaterialButton(
                 key: Key("Distance"),
-                child: Text("Filter by distance"),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children:[Icon(Icons.place)]
+                  ),
                 onPressed: () {
                   setState(() {
                     distance = true;
@@ -213,7 +219,10 @@ class _GeneratedIPhoneXRXSMax1110WidgetState
              
               MaterialButton(
                   key: Key("Weather"),
-                  child: Text("Weather"),
+                  child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children:[Icon(Icons.wb_sunny)]
+                  ),
                   onPressed: () async {
                     await _determinePosition().then((value) async => {
                           await getWeather(value.latitude, value.longitude),
@@ -225,7 +234,10 @@ class _GeneratedIPhoneXRXSMax1110WidgetState
                   }),
               MaterialButton(
                 key: Key("LogOut"),
-                child: Text("Sign Out"),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children:[Icon(Icons.logout)]
+                  ),
                 onPressed: () async {
                   print(FirebaseAuth.instance.currentUser);
                   await FirebaseAuth.instance
