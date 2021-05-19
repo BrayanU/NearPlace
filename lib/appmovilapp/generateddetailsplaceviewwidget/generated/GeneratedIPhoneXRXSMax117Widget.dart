@@ -425,11 +425,11 @@ class GeneratedIPhoneXRXSMax117WidgetState
                             child: Text("Go",
                                 style: new TextStyle(
                                     fontSize: 20, color: Colors.white)),
-                            onPressed: () {}),
-                        onTap: () {
-                          widget.setRoute(true);
-                          widget.setFalse(false);
-                        }))
+                            onPressed: () {
+                              widget.setRoute(true);
+                              widget.setFalse(false);
+                            }),
+                        onTap: () {}))
               ],
             )
           ]),

@@ -128,7 +128,7 @@ class _Mapa extends State<Mapa> {
   GlobalKey<GeneratedIPhoneXRXSMax117WidgetState> _keyChild1 = GlobalKey();
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  Future<http.Response> getPlaces(lat, long,dist3) async {
+  Future<http.Response> getPlaces(lat, long, dist3) async {
     print("getPlace");
     print(dist);
     return await http.get(Uri.parse(
@@ -141,7 +141,7 @@ class _Mapa extends State<Mapa> {
     _marker = Set();
     _route = Set();
     polylines = Set();
-    dist=10.0;
+    dist = 10.0;
     emptyPoly = Set();
     _isFav = false;
     _initMarkers(dist);
@@ -181,7 +181,7 @@ class _Mapa extends State<Mapa> {
 
   _makeaRoute() async {
     Marker startMarker, destinationMarker;
-  
+
     await Geolocator.getCurrentPosition().then((value) async => {
           startMarker = Marker(
               markerId: MarkerId('${value.latitude}'),
@@ -234,10 +234,11 @@ class _Mapa extends State<Mapa> {
     CollectionReference user = FirebaseFirestore.instance.collection('user');
     CollectionReference reviews =
         FirebaseFirestore.instance.collection('ratings');
-    await _determinePosition().then((value) =>
-        getPlaces(value.latitude, value.longitude,dist2).then((value) async => {
+    await _determinePosition().then((value) => getPlaces(
+            value.latitude, value.longitude, dist2)
+        .then((value) async => {
               for (var word in json.decode(value.body)['results'])
-                { 
+                {
                   //print(word),
                   if (word.containsKey(
                       'opening_hours') /*  &&
@@ -245,6 +246,7 @@ class _Mapa extends State<Mapa> {
                   )
                     {
                       pc = new nearPlaces(),
+
                       pc.name = word['name'],
                       print(word['types']),
                       if (word['types'].length >= 3)
@@ -369,21 +371,24 @@ class _Mapa extends State<Mapa> {
               print(widget.marks)
             }));
   }
-checkDistance(String distanceF) {
-    if (distanceF.trim().isNotEmpty){
+
+  checkDistance(String distanceF) {
+    if (distanceF.trim().isNotEmpty) {
       print("empty");
-      if (dist.compareTo(double.parse(distanceF))!=0) {
+      if (dist.compareTo(double.parse(distanceF)) != 0) {
         print("checkDistance");
         _markers.clear();
+        _places.clear();
         dist = double.parse(distanceF);
         print(dist);
         _initMarkers(dist);
         return true;
       }
     }
-    
+
     return false;
   }
+
   checkSearch(String searchFor) {
     if (searchFor.trim().isNotEmpty) {
       _marker.clear();
@@ -432,9 +437,9 @@ checkDistance(String distanceF) {
           ),
           markers: widget.offRoute
               ? _route
-              : ((checkSearch(widget.searchFor)) ?  _marker : 
-              ((checkDistance(widget.distanceF)) ?  _markers : 
-              _markers)),
+              : ((checkSearch(widget.searchFor))
+                  ? _marker
+                  : ((checkDistance(widget.distanceF)) ? _markers : _markers)),
           polylines: widget.offRoute ? polylines : emptyPoly,
         ),
         Stack(children: [
