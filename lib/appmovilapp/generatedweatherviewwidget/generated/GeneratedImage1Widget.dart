@@ -25,12 +25,40 @@ class _GeneratedImage1WidgetState extends State<GeneratedImage1Widget> {
       child: ClipRRect(
         borderRadius: BorderRadius.zero,
         child: Padding(
-          padding: const EdgeInsets.only(top: 3.0),
-          child: Text(
-            "Temperatura actual: ${widget.temp.toString()}° Celsius\n Descripción del clima: ${widget.desc}", //key2.toString(),
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                color: Colors.red, fontFamily: 'IranSansLight', fontSize: 20.0),
+          padding: const EdgeInsets.only(top: 10.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Spacer(flex: 4,),
+              Text("Temperatura actual:",
+                textAlign: TextAlign.center,
+                style: TextStyle( fontSize: 20.0)
+              ),
+              Spacer(flex: 1,),
+              Text("${widget.temp.toString().substring(0,5)}° Celsius", //key2.toString(),
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                color: Colors.amber, fontWeight: FontWeight.bold, fontFamily: 'IranSansLight', fontSize: 30.0),
+              ),
+              Spacer(flex: 2,),
+              Text("Descripción de clima:",
+                textAlign: TextAlign.center,
+                style: TextStyle( fontSize: 20.0)
+              ),
+              Spacer(flex: 1,),
+              Text("${widget.desc}", 
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.amber, fontWeight: FontWeight.bold, fontSize: 28.0
+                ),
+              ),
+              Spacer(flex: 1,),
+              Icon(
+                Icons.wb_sunny,
+                size: 45.0,
+                color: Colors.amber,
+              )
+            ],
           ),
         ),
       ),
