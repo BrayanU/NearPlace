@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -20,6 +21,7 @@ class Mapa extends StatefulWidget {
   final int zoom;
   final Set<Marker> allMarks;
   final String searchFor;
+  final String distanceF;
   final ValueChanged<bool> routing;
   final ValueChanged<Set<Marker>> marks;
   final bool offRoute;
@@ -29,6 +31,7 @@ class Mapa extends StatefulWidget {
     this.routing,
     this.marks,
     this.searchFor,
+    this.distanceF,
     this.center,
     this.zoom,
     this.markers,
@@ -111,6 +114,7 @@ class _Mapa extends State<Mapa> {
   List<LatLng> polylineCoordinates = [];
   bool _bool = false;
   bool _review = false;
+  double dist;
   List<reviewsObj> _reviews = [];
   GoogleMapController mapController;
   Set<Marker> _markers;
@@ -124,9 +128,11 @@ class _Mapa extends State<Mapa> {
   GlobalKey<GeneratedIPhoneXRXSMax117WidgetState> _keyChild1 = GlobalKey();
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  Future<http.Response> getPlaces(lat, long) async {
+  Future<http.Response> getPlaces(lat, long, dist3) async {
+    print("getPlace");
+    print(dist);
     return await http.get(Uri.parse(
-        'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$lat,$long&type=restaurant&radius=15000&key=AIzaSyCYrOoham5IJ0r3L_S80mpUPftWqxOuuZ0')); //&type=restaurant&keyword=cruise
+        'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$lat,$long&type=restaurant&radius=$dist3&key=AIzaSyCYrOoham5IJ0r3L_S80mpUPftWqxOuuZ0')); //&type=restaurant&keyword=cruise
   }
 
   @override
@@ -135,9 +141,10 @@ class _Mapa extends State<Mapa> {
     _marker = Set();
     _route = Set();
     polylines = Set();
+    dist = 10.0;
     emptyPoly = Set();
     _isFav = false;
-    _initMarkers();
+    _initMarkers(dist);
     childTitle = new nearPlaces();
     _center = widget.center;
     _zoom = widget.zoom;
@@ -216,8 +223,10 @@ class _Mapa extends State<Mapa> {
     mapController = controller;
   }
 
-  Future<void> _initMarkers() async {
+  Future<void> _initMarkers(double dist2) async {
     nearPlaces pc;
+    print("InitMarkers1");
+    print(dist2);
     String markerIdVal;
     String str = "";
     CollectionReference places =
@@ -225,8 +234,9 @@ class _Mapa extends State<Mapa> {
     CollectionReference user = FirebaseFirestore.instance.collection('user');
     CollectionReference reviews =
         FirebaseFirestore.instance.collection('ratings');
-    await _determinePosition().then((value) =>
-        getPlaces(value.latitude, value.longitude).then((value) async => {
+    await _determinePosition().then((value) => getPlaces(
+            value.latitude, value.longitude, dist2)
+        .then((value) async => {
               for (var word in json.decode(value.body)['results'])
                 {
                   //print(word),
@@ -236,6 +246,7 @@ class _Mapa extends State<Mapa> {
                   )
                     {
                       pc = new nearPlaces(),
+
                       pc.name = word['name'],
                       print(word['types']),
                       if (word['types'].length >= 3)
@@ -361,6 +372,23 @@ class _Mapa extends State<Mapa> {
             }));
   }
 
+  checkDistance(String distanceF) {
+    if (distanceF.trim().isNotEmpty) {
+      print("empty");
+      if (dist.compareTo(double.parse(distanceF)) != 0) {
+        print("checkDistance");
+        _markers.clear();
+        _places.clear();
+        dist = double.parse(distanceF);
+        print(dist);
+        _initMarkers(dist);
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   checkSearch(String searchFor) {
     if (searchFor.trim().isNotEmpty) {
       _marker.clear();
@@ -409,7 +437,9 @@ class _Mapa extends State<Mapa> {
           ),
           markers: widget.offRoute
               ? _route
-              : ((checkSearch(widget.searchFor)) ? _marker : _markers),
+              : ((checkSearch(widget.searchFor))
+                  ? _marker
+                  : ((checkDistance(widget.distanceF)) ? _markers : _markers)),
           polylines: widget.offRoute ? polylines : emptyPoly,
         ),
         Stack(children: [
