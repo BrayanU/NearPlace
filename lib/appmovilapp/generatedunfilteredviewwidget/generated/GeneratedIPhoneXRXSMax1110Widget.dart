@@ -197,7 +197,7 @@ class _GeneratedIPhoneXRXSMax1110WidgetState
                 key: Key("Search"),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children:[Icon(Icons.search)]
+                  children:[Icon(Icons.search, size: 35.0)]
                   ),
                 onPressed: () {
                   setState(() {
@@ -207,34 +207,46 @@ class _GeneratedIPhoneXRXSMax1110WidgetState
                 },
               ),
               MaterialButton(
-                child: Text("Restaurant"),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children:[Icon(Icons.restaurant, size: 35.0, )]
+                ),
                 onPressed: () {
                   setState(() {
                     categories = "restaurant";
                   });
+                  Navigator.pop(context);
                 },
               ),
               MaterialButton(
-                child: Text("Cafe"),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children:[Icon(Icons.local_cafe, size: 35.0, )]
+                ),
                 onPressed: () {
                   setState(() {
                     categories = "cafe";
                   });
+                  Navigator.pop(context);
                 },
               ),
               MaterialButton(
-                child: Text("ATM"),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children:[Icon(Icons.local_atm, size: 35.0 )]
+                  ),
                 onPressed: () {
                   setState(() {
                     categories = "atm";
                   });
+                  Navigator.pop(context);
                 },
               ),
               MaterialButton(
                 key: Key("Distance"),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children:[Icon(Icons.place)]
+                  children:[Icon(Icons.place, size: 35.0,)]
                   ),
                 onPressed: () {
                   setState(() {
@@ -247,7 +259,7 @@ class _GeneratedIPhoneXRXSMax1110WidgetState
                   key: Key("Weather"),
                   child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children:[Icon(Icons.wb_sunny)]
+                  children:[Icon(Icons.wb_cloudy, size: 35.0, )]
                   ),
                   onPressed: () async {
                     await _determinePosition().then((value) async => {
@@ -262,7 +274,7 @@ class _GeneratedIPhoneXRXSMax1110WidgetState
                 key: Key("LogOut"),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children:[Icon(Icons.logout)]
+                  children:[Icon(Icons.logout, size: 35.0)]
                   ),
                 onPressed: () async {
                   print(FirebaseAuth.instance.currentUser);
