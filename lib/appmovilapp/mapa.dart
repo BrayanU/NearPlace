@@ -20,6 +20,7 @@ class Mapa extends StatefulWidget {
   final Set<Marker> markers;
   final int zoom;
   final Set<Marker> allMarks;
+  final String categories;
   final String searchFor;
   final String distanceF;
   final ValueChanged<bool> routing;
@@ -30,6 +31,7 @@ class Mapa extends StatefulWidget {
     Key key,
     this.routing,
     this.marks,
+    this.categories,
     this.searchFor,
     this.distanceF,
     this.center,
@@ -115,6 +117,7 @@ class _Mapa extends State<Mapa> {
   bool _bool = false;
   bool _review = false;
   double dist;
+  String category;
   List<reviewsObj> _reviews = [];
   GoogleMapController mapController;
   Set<Marker> _markers;
@@ -128,23 +131,24 @@ class _Mapa extends State<Mapa> {
   GlobalKey<GeneratedIPhoneXRXSMax117WidgetState> _keyChild1 = GlobalKey();
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  Future<http.Response> getPlaces(lat, long, dist3) async {
+  Future<http.Response> getPlaces(lat, long, dist3, cat) async {
     print("getPlace");
     print(dist);
     return await http.get(Uri.parse(
-        'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$lat,$long&type=restaurant&radius=$dist3&key=AIzaSyCYrOoham5IJ0r3L_S80mpUPftWqxOuuZ0')); //&type=restaurant&keyword=cruise
+        'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$lat,$long&type=$cat&radius=$dist3&key=AIzaSyCYrOoham5IJ0r3L_S80mpUPftWqxOuuZ0')); //&type=restaurant&keyword=cruise
   }
 
   @override
   void initState() {
     _markers = Set();
     _marker = Set();
+    category = "restaurant";
     _route = Set();
     polylines = Set();
-    dist = 10.0;
+    dist = 1000.0;
     emptyPoly = Set();
     _isFav = false;
-    _initMarkers(dist);
+    _initMarkers(dist, category);
     childTitle = new nearPlaces();
     _center = widget.center;
     _zoom = widget.zoom;
@@ -223,7 +227,7 @@ class _Mapa extends State<Mapa> {
     mapController = controller;
   }
 
-  Future<void> _initMarkers(double dist2) async {
+  Future<void> _initMarkers(double dist2, String cat) async {
     nearPlaces pc;
     print("InitMarkers1");
     print(dist2);
@@ -235,7 +239,7 @@ class _Mapa extends State<Mapa> {
     CollectionReference reviews =
         FirebaseFirestore.instance.collection('ratings');
     await _determinePosition().then((value) => getPlaces(
-            value.latitude, value.longitude, dist2)
+            value.latitude, value.longitude, dist2, cat)
         .then((value) async => {
               for (var word in json.decode(value.body)['results'])
                 {
@@ -373,6 +377,14 @@ class _Mapa extends State<Mapa> {
   }
 
   checkDistance(String distanceF) {
+    if (category != widget.categories) {
+      setState(() {
+        category = widget.categories;
+      });
+      _markers.clear();
+      _places.clear();
+      _initMarkers(dist, category);
+    }
     if (distanceF.trim().isNotEmpty) {
       print("empty");
       if (dist.compareTo(double.parse(distanceF)) != 0) {
@@ -381,7 +393,7 @@ class _Mapa extends State<Mapa> {
         _places.clear();
         dist = double.parse(distanceF);
         print(dist);
-        _initMarkers(dist);
+        _initMarkers(dist, category);
         return true;
       }
     }
