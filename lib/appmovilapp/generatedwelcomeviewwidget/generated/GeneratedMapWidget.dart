@@ -12,7 +12,7 @@ class GeneratedMapWidget extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.zero,
         child: Image.asset(
-          "assets/images/24c2c4ddbe814c1db6ff3913a2dd7716",
+          "assets/images/24c2c4ddbe814c1db6ff3913a2dd7716.png",
           color: null,
           fit: BoxFit.fill,
           width: 515.0,
