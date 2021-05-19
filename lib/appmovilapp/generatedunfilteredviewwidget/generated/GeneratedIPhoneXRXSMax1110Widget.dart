@@ -35,7 +35,8 @@ class _GeneratedIPhoneXRXSMax1110WidgetState
   bool searching = false, _weather = false;
   String namePlace = " ";
   String distanceFilter = "";
-  bool routing = false, distance=false;
+  String categories = "restaurant";
+  bool routing = false, distance = false;
   String tmpName;
   double temperature;
   String desc;
@@ -53,6 +54,7 @@ class _GeneratedIPhoneXRXSMax1110WidgetState
       routing = sw;
     });
   }
+
   bool _setDistance(bool sw) {
     setState(() {
       distance = sw;
@@ -151,38 +153,39 @@ class _GeneratedIPhoneXRXSMax1110WidgetState
                     ),
                   )
                 ])
-              : distance ? Row(children: [
-                  Container(
-                      height: 40,
-                      width: 200,
-                      alignment: Alignment.center,
-                      child: TextField(
-                          onChanged: (value) {
-                            tmpName = value;
+              : distance
+                  ? Row(children: [
+                      Container(
+                          height: 40,
+                          width: 200,
+                          alignment: Alignment.center,
+                          child: TextField(
+                              onChanged: (value) {
+                                tmpName = value;
+                              },
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20.0)),
+                                labelText: 'Set a distance (km)',
+                              ))),
+                      Container(
+                        padding: EdgeInsets.all(8.0),
+                        child: GestureDetector(
+                          child: GeneratedSearchWidget2(),
+                          onTap: () {
+                            setState(() {
+                              distance = false;
+                              print(tmpName);
+                              distanceFilter = tmpName;
+                              tmpName = "";
+                            });
                           },
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20.0)),
-                            labelText: 'Set a distance (km)',
-                          ))),
-                  Container(
-                    padding: EdgeInsets.all(8.0),
-                    child: GestureDetector(
-                      child: GeneratedSearchWidget2(),
-                      onTap: () {
-                        setState(() {
-                          distance = false;
-                          print(tmpName);
-                          distanceFilter = tmpName;
-                          tmpName = "";
-                        });
-                      },
-                    ),
-                  )
-                ])
-              : Text("NearPlace"),
+                        ),
+                      )
+                    ])
+                  : Text("NearPlace"),
         ),
         endDrawer: Drawer(
           key: Key("Drawer"),
@@ -204,6 +207,30 @@ class _GeneratedIPhoneXRXSMax1110WidgetState
                 },
               ),
               MaterialButton(
+                child: Text("Restaurant"),
+                onPressed: () {
+                  setState(() {
+                    categories = "restaurant";
+                  });
+                },
+              ),
+              MaterialButton(
+                child: Text("Cafe"),
+                onPressed: () {
+                  setState(() {
+                    categories = "cafe";
+                  });
+                },
+              ),
+              MaterialButton(
+                child: Text("ATM"),
+                onPressed: () {
+                  setState(() {
+                    categories = "atm";
+                  });
+                },
+              ),
+              MaterialButton(
                 key: Key("Distance"),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -216,7 +243,6 @@ class _GeneratedIPhoneXRXSMax1110WidgetState
                   Navigator.pop(context);
                 },
               ),
-             
               MaterialButton(
                   key: Key("Weather"),
                   child: Row(
@@ -260,6 +286,7 @@ class _GeneratedIPhoneXRXSMax1110WidgetState
             Mapa(
               key: Key("Mapa"),
               marks: _nothing,
+              categories: this.categories,
               allMarks: this.markersTotal,
               searchFor: this.namePlace,
               distanceF: this.distanceFilter,
