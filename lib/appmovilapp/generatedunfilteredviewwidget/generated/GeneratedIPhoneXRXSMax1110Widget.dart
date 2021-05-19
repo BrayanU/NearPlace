@@ -34,7 +34,8 @@ class _GeneratedIPhoneXRXSMax1110WidgetState
     extends State<GeneratedIPhoneXRXSMax1110Widget> {
   bool searching = false, _weather = false;
   String namePlace = " ";
-  bool routing = false;
+  String distanceFilter = "";
+  bool routing = false, distance=false;
   String tmpName;
   double temperature;
   String desc;
@@ -50,6 +51,11 @@ class _GeneratedIPhoneXRXSMax1110WidgetState
   bool _setRouting(bool sw) {
     setState(() {
       routing = sw;
+    });
+  }
+  bool _setDistance(bool sw) {
+    setState(() {
+      distance = sw;
     });
   }
 
@@ -145,6 +151,37 @@ class _GeneratedIPhoneXRXSMax1110WidgetState
                     ),
                   )
                 ])
+              : distance ? Row(children: [
+                  Container(
+                      height: 40,
+                      width: 200,
+                      alignment: Alignment.center,
+                      child: TextField(
+                          onChanged: (value) {
+                            tmpName = value;
+                          },
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20.0)),
+                            labelText: 'Set a distance (km)',
+                          ))),
+                  Container(
+                    padding: EdgeInsets.all(8.0),
+                    child: GestureDetector(
+                      child: GeneratedSearchWidget2(),
+                      onTap: () {
+                        setState(() {
+                          distance = false;
+                          print(tmpName);
+                          distanceFilter = tmpName;
+                          tmpName = "";
+                        });
+                      },
+                    ),
+                  )
+                ])
               : Text("NearPlace"),
         ),
         endDrawer: Drawer(
@@ -163,6 +200,17 @@ class _GeneratedIPhoneXRXSMax1110WidgetState
                   Navigator.pop(context);
                 },
               ),
+              MaterialButton(
+                key: Key("Distance"),
+                child: Text("Filter by distance"),
+                onPressed: () {
+                  setState(() {
+                    distance = true;
+                  });
+                  Navigator.pop(context);
+                },
+              ),
+             
               MaterialButton(
                   key: Key("Weather"),
                   child: Text("Weather"),
@@ -202,6 +250,7 @@ class _GeneratedIPhoneXRXSMax1110WidgetState
               marks: _nothing,
               allMarks: this.markersTotal,
               searchFor: this.namePlace,
+              distanceF: this.distanceFilter,
               routing: _setRouting,
               offRoute: this.routing,
               center: LatLng(11.0040, -74.8071),

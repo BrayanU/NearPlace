@@ -21,7 +21,7 @@ dependencies:
   weather: ^2.0.0
   geocoding: ^2.0.0
   get: ^4.1.4
-  mockito: ^4.1.4
+  mockito:
 dev_dependencies: 
   flutter_test: 
     sdk: "flutter"
