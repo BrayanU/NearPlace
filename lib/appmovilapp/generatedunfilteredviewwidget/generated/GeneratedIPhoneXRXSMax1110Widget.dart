@@ -187,111 +187,126 @@ class _GeneratedIPhoneXRXSMax1110WidgetState
                     ])
                   : Text("NearPlace"),
         ),
-        endDrawer: Drawer(
-          key: Key("Drawer"),
-          child: Center(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              MaterialButton(
-                key: Key("Search"),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children:[Icon(Icons.search, size: 35.0)]
+        endDrawer: Container(
+            width: MediaQuery.of(context).size.width * 0.4,
+            child: Drawer(
+              key: Key("Drawer"),
+              child: Center(
+                  child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  MaterialButton(
+                    key: Key("Search"),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [Icon(Icons.search, size: 35.0)]),
+                    onPressed: () {
+                      setState(() {
+                        searching = true;
+                      });
+                      Navigator.pop(context);
+                    },
                   ),
-                onPressed: () {
-                  setState(() {
-                    searching = true;
-                  });
-                  Navigator.pop(context);
-                },
-              ),
-              MaterialButton(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children:[Icon(Icons.restaurant, size: 35.0, )]
-                ),
-                onPressed: () {
-                  setState(() {
-                    categories = "restaurant";
-                  });
-                  Navigator.pop(context);
-                },
-              ),
-              MaterialButton(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children:[Icon(Icons.local_cafe, size: 35.0, )]
-                ),
-                onPressed: () {
-                  setState(() {
-                    categories = "cafe";
-                  });
-                  Navigator.pop(context);
-                },
-              ),
-              MaterialButton(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children:[Icon(Icons.local_atm, size: 35.0 )]
+                  MaterialButton(
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Icon(
+                            Icons.restaurant,
+                            size: 35.0,
+                          )
+                        ]),
+                    onPressed: () {
+                      setState(() {
+                        categories = "restaurant";
+                      });
+                      Navigator.pop(context);
+                    },
                   ),
-                onPressed: () {
-                  setState(() {
-                    categories = "atm";
-                  });
-                  Navigator.pop(context);
-                },
-              ),
-              MaterialButton(
-                key: Key("Distance"),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children:[Icon(Icons.place, size: 35.0,)]
+                  MaterialButton(
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Icon(
+                            Icons.local_cafe,
+                            size: 35.0,
+                          )
+                        ]),
+                    onPressed: () {
+                      setState(() {
+                        categories = "cafe";
+                      });
+                      Navigator.pop(context);
+                    },
                   ),
-                onPressed: () {
-                  setState(() {
-                    distance = true;
-                  });
-                  Navigator.pop(context);
-                },
-              ),
-              MaterialButton(
-                  key: Key("Weather"),
-                  child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children:[Icon(Icons.wb_cloudy, size: 35.0, )]
+                  MaterialButton(
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [Icon(Icons.local_atm, size: 35.0)]),
+                    onPressed: () {
+                      setState(() {
+                        categories = "atm";
+                      });
+                      Navigator.pop(context);
+                    },
                   ),
-                  onPressed: () async {
-                    await _determinePosition().then((value) async => {
-                          await getWeather(value.latitude, value.longitude),
-                          setState(() {
-                            _weather = true;
-                          }),
-                          Navigator.pop(context)
-                        });
-                  }),
-              MaterialButton(
-                key: Key("LogOut"),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children:[Icon(Icons.logout, size: 35.0)]
+                  MaterialButton(
+                    key: Key("Distance"),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Icon(
+                            Icons.place,
+                            size: 35.0,
+                          )
+                        ]),
+                    onPressed: () {
+                      setState(() {
+                        distance = true;
+                      });
+                      Navigator.pop(context);
+                    },
                   ),
-                onPressed: () async {
-                  print(FirebaseAuth.instance.currentUser);
-                  await FirebaseAuth.instance
-                      .signOut()
-                      .then((value) => {
-                            print("Signed Out"),
-                            Navigator.pushNamed(
-                                context, '/GeneratedPrimeraviewWidget')
-                          })
-                      .catchError(
-                          (error) => {print("Error was caught: $error")});
-                },
-              )
-            ],
-          )),
-        ),
+                  MaterialButton(
+                      key: Key("Weather"),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Icon(
+                              Icons.wb_cloudy,
+                              size: 35.0,
+                            )
+                          ]),
+                      onPressed: () async {
+                        await _determinePosition().then((value) async => {
+                              await getWeather(value.latitude, value.longitude),
+                              setState(() {
+                                _weather = true;
+                              }),
+                              Navigator.pop(context)
+                            });
+                      }),
+                  MaterialButton(
+                    key: Key("LogOut"),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [Icon(Icons.logout, size: 35.0)]),
+                    onPressed: () async {
+                      print(FirebaseAuth.instance.currentUser);
+                      await FirebaseAuth.instance
+                          .signOut()
+                          .then((value) => {
+                                print("Signed Out"),
+                                Navigator.pushNamed(
+                                    context, '/GeneratedPrimeraviewWidget')
+                              })
+                          .catchError(
+                              (error) => {print("Error was caught: $error")});
+                    },
+                  )
+                ],
+              )),
+            )),
         body: Container(
             child: Stack(
           children: [
