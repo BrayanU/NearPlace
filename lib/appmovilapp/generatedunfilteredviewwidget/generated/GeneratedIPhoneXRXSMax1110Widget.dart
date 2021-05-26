@@ -273,7 +273,7 @@ class _GeneratedIPhoneXRXSMax1110WidgetState
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Icon(
-                              Icons.wb_cloudy,
+                              Icons.thermostat_outlined ,
                               size: 35.0,
                             )
                           ]),
@@ -353,73 +353,6 @@ class _GeneratedIPhoneXRXSMax1110WidgetState
                     : null)
           ],
         ))
-        /*  Positioned(
-                left: 0.0,
-                top: 69.0,
-                right: null,
-                bottom: null,
-                width: 515.0,
-                height: 890.0,
-                //child: GeneratedMapWidget6(),
-                child: Mapa(
-                  center: LatLng(10.9800, -74.7995),
-                  zoom: 50,
-                  markers: _markers,
-                )), */
-        /* Positioned(
-              left: 18.0,
-              top: 12.0,
-              right: null,
-              bottom: null,
-              width: 422.0,
-              height: 81.0,
-              child: GeneratedRectangle6Widget6(),
-            ), */
-        /*  Positioned(
-              left: 352.0,
-              top: 12.0,
-              right: null,
-              bottom: null,
-              width: 84.0,
-              height: 81.0,
-              child: GeneratedRectangle7Widget6(),
-            ), */
-        /* Positioned(
-              left: 61.0,
-              top: 35.0,
-              right: null,
-              bottom: null,
-              width: 116.0,
-              height: 33.0,
-              child: GeneratedNearPlaceWidget3(),
-            ), */
-        /* Positioned(
-              left: 372.5,
-              top: 32.5,
-              right: null,
-              bottom: null,
-              width: 48.426998138427734,
-              height: 0.0,
-              child: GeneratedLine7Widget(),
-            ),
-            Positioned(
-              left: 372.5,
-              top: 50.5,
-              right: null,
-              bottom: null,
-              width: 48.426998138427734,
-              height: 0.0,
-              child: GeneratedLine8Widget(),
-            ),
-            Positioned(
-              left: 372.5,
-              top: 68.5,
-              right: null,
-              bottom: null,
-              width: 48.426998138427734,
-              height: 0.0,
-              child: GeneratedLine9Widget(), )*/
-
         );
   }
 }

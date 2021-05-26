@@ -64,7 +64,8 @@ class reviewsObj {
     this.userName,
   });
 
-  factory reviewsObj.fromJson(Map<String, dynamic> json) => reviewsObj(
+  factory reviewsObj.fromJson(Map<String, dynamic> json) =>
+      reviewsObj(
         rate: json["rate"],
         description: json["text"],
         userName: json["userName"],
@@ -159,52 +160,55 @@ class _Mapa extends State<Mapa> {
     polylinePoints = PolylinePoints();
     await polylinePoints
         .getRouteBetweenCoordinates(
-          'AIzaSyCYrOoham5IJ0r3L_S80mpUPftWqxOuuZ0',
-          PointLatLng(start.latitude, start.longitude),
-          PointLatLng(destination.latitude, destination.longitude),
-          travelMode: TravelMode.driving,
-        )
-        .then((value) => setState(() {
-              if (value.points.isNotEmpty) {
-                value.points.forEach((PointLatLng point) {
-                  polylineCoordinates
-                      .add(LatLng(point.latitude, point.longitude));
-                });
-              }
-              PolylineId id = PolylineId('poly');
-              Polyline polyline = Polyline(
-                polylineId: id,
-                color: Colors.blue,
-                points: polylineCoordinates,
-                width: 3,
-              );
-              polylines.add(polyline);
-            }));
+      'AIzaSyCYrOoham5IJ0r3L_S80mpUPftWqxOuuZ0',
+      PointLatLng(start.latitude, start.longitude),
+      PointLatLng(destination.latitude, destination.longitude),
+      travelMode: TravelMode.driving,
+    )
+        .then((value) =>
+        setState(() {
+          if (value.points.isNotEmpty) {
+            value.points.forEach((PointLatLng point) {
+              polylineCoordinates
+                  .add(LatLng(point.latitude, point.longitude));
+            });
+          }
+          PolylineId id = PolylineId('poly');
+          Polyline polyline = Polyline(
+            polylineId: id,
+            color: Colors.blue,
+            points: polylineCoordinates,
+            width: 3,
+          );
+          polylines.add(polyline);
+        }));
     return true;
   }
 
   _makeaRoute() async {
     Marker startMarker, destinationMarker;
 
-    await Geolocator.getCurrentPosition().then((value) async => {
-          startMarker = Marker(
-              markerId: MarkerId('${value.latitude}'),
-              position: LatLng(value.latitude, value.longitude)),
-          destinationMarker = Marker(
-              markerId: MarkerId("${this.childTitle.name}"),
-              position: this.childTitle.location),
-          await _createPolylines(
-                  value,
-                  Position(
-                      latitude: this.childTitle.location.latitude,
-                      longitude: this.childTitle.location.longitude))
-              .then((value) => {
-                    setState(() {
-                      _route.add(startMarker);
-                      _route.add(destinationMarker);
-                    })
-                  }),
-        });
+    await Geolocator.getCurrentPosition().then((value) async =>
+    {
+      startMarker = Marker(
+          markerId: MarkerId('${value.latitude}'),
+          position: LatLng(value.latitude, value.longitude)),
+      destinationMarker = Marker(
+          markerId: MarkerId("${this.childTitle.name}"),
+          position: this.childTitle.location),
+      await _createPolylines(
+          value,
+          Position(
+              latitude: this.childTitle.location.latitude,
+              longitude: this.childTitle.location.longitude))
+          .then((value) =>
+      {
+        setState(() {
+          _route.add(startMarker);
+          _route.add(destinationMarker);
+        })
+      }),
+    });
     return true;
   }
 
@@ -234,146 +238,151 @@ class _Mapa extends State<Mapa> {
     String markerIdVal;
     String str = "";
     CollectionReference places =
-        FirebaseFirestore.instance.collection('places');
+    FirebaseFirestore.instance.collection('places');
     CollectionReference user = FirebaseFirestore.instance.collection('user');
     CollectionReference reviews =
-        FirebaseFirestore.instance.collection('ratings');
-    await _determinePosition().then((value) => getPlaces(
+    FirebaseFirestore.instance.collection('ratings');
+    await _determinePosition().then((value) =>
+        getPlaces(
             value.latitude, value.longitude, dist2, cat)
-        .then((value) async => {
-              for (var word in json.decode(value.body)['results'])
-                {
-                  //print(word),
-                  if (word.containsKey(
-                      'opening_hours') /*  &&
+            .then((value) async =>
+        {
+          for (var word in json.decode(value.body)['results'])
+            {
+              //print(word),
+              if (word.containsKey(
+                  'opening_hours') /*  &&
                       word['opening_hours']['open_now'] */
-                  )
-                    {
-                      pc = new nearPlaces(),
+              )
+                {
+                  pc = new nearPlaces(),
 
-                      pc.name = word['name'],
-                      print(word['types']),
-                      if (word['types'].length >= 3)
+                  pc.name = word['name'],
+                  print(word['types']),
+                  if (word['types'].length >= 3)
+                    {
+                      for (var i = 0; i < 2; i++)
                         {
-                          for (var i = 0; i < 2; i++)
-                            {
-                              str +=
-                                  word['types'][i].replaceAll("_", " ") + ", ",
-                            },
-                          str += word['types'][2].replaceAll("_", " "),
-                        }
-                      else
-                        {
-                          for (var i = 0; i < word['types'].length; i++)
-                            {
-                              str +=
-                                  word['types'][i].replaceAll("_", " ") + ", ",
-                            },
+                          str +=
+                              word['types'][i].replaceAll("_", " ") + ", ",
                         },
-                      pc.type = str,
-                      str = "",
-                      pc.location = LatLng(word['geometry']['location']['lat'],
-                          word['geometry']['location']['lng']),
-                      _places.add(pc)
-                      //print(pc.name),
+                      str += word['types'][2].replaceAll("_", " "),
                     }
-                },
-              setState(
-                () {
-                  for (var word in _places) {
-                    markerIdVal = 'marker_id_${word.name}';
-                    _markers.add(
-                      Marker(
-                        markerId: MarkerId(markerIdVal),
-                        position: word.location,
-                        onTap: () async {
-                          print("This has been tap ${word.name}");
-                          await places
-                              .where('name', isEqualTo: word.name)
-                              .get()
-                              .then((value) async => {
-                                    if (value.docs.isEmpty)
-                                      {
-                                        await places.add({
-                                          'name': word.name,
-                                          'rating': 0.0,
-                                          'accumulatedRating': 0,
-                                          'totalRating': 0
-                                        })
-                                      }
-                                    else
-                                      {
-                                        word.rating =
-                                            value.docs.first.data()['rating'],
-                                        word.totalRatings = value.docs.first
-                                            .data()['totalRating'],
-                                        await reviews
-                                            .where('placeName',
-                                                isEqualTo: word.name)
-                                            .get()
-                                            .then((rwdata) async => {
-                                                  _reviews.clear(),
-                                                  if (rwdata.docs.isNotEmpty)
-                                                    {
-                                                      print(
-                                                          "There are ${rwdata.docs.length}"),
-                                                      _reviews = rwdata.docs
-                                                          .toList()
-                                                          .map((value) =>
-                                                              reviewsObj
-                                                                  .fromJson(value
-                                                                      .data()))
-                                                          .toList(),
-                                                    },
-                                                  await user
-                                                      .where('userId',
-                                                          isEqualTo:
-                                                              FirebaseAuth
-                                                                  .instance
-                                                                  .currentUser
-                                                                  .uid)
-                                                      .get()
-                                                      .then((userval) => {
-                                                            if (userval.docs[0]
-                                                                .data()[
-                                                                    'favPlaces']
-                                                                .contains(
-                                                                    word.name))
-                                                              {
-                                                                setState(() {
-                                                                  _isFav = true;
-                                                                })
-                                                              }
-                                                            else
-                                                              {
-                                                                setState(() {
-                                                                  _isFav =
-                                                                      false;
-                                                                })
-                                                              }
-                                                          })
-                                                })
-                                      }
-                                  });
-                          setState(() {
-                            _bool = true;
-                            childTitle = word;
-                            print(childTitle);
-                            print(_bool);
-                          });
+                  else
+                    {
+                      for (var i = 0; i < word['types'].length; i++)
+                        {
+                          str +=
+                              word['types'][i].replaceAll("_", " ") + ", ",
                         },
-                      ),
-                    );
-                    print(word.name);
-                  }
-                },
-              ),
-              setState(() {
-                print("THIS IS NULL${_markers.length}");
-                widget.marks(_markers);
-              }),
-              print(widget.marks)
-            }));
+                    },
+                  pc.type = str,
+                  str = "",
+                  pc.location = LatLng(word['geometry']['location']['lat'],
+                      word['geometry']['location']['lng']),
+                  _places.add(pc)
+                  //print(pc.name),
+                }
+            },
+          setState(
+                () {
+              for (var word in _places) {
+                markerIdVal = 'marker_id_${word.name}';
+                _markers.add(
+                  Marker(
+                    markerId: MarkerId(markerIdVal),
+                    position: word.location,
+                    onTap: () async {
+                      print("This has been tap ${word.name}");
+                      await places
+                          .where('name', isEqualTo: word.name)
+                          .get()
+                          .then((value) async =>
+                      {
+                        if (value.docs.isEmpty)
+                          {
+                            await places.add({
+                              'name': word.name,
+                              'rating': 0.0,
+                              'accumulatedRating': 0,
+                              'totalRating': 0
+                            })
+                          }
+                        else
+                          {
+                            word.rating =
+                            value.docs.first.data()['rating'],
+                            word.totalRatings = value.docs.first
+                                .data()['totalRating'],
+                            await reviews
+                                .where('placeName',
+                                isEqualTo: word.name)
+                                .get()
+                                .then((rwdata) async =>
+                            {
+                              _reviews.clear(),
+                              if (rwdata.docs.isNotEmpty)
+                                {
+                                  print(
+                                      "There are ${rwdata.docs.length}"),
+                                  _reviews = rwdata.docs
+                                      .toList()
+                                      .map((value) =>
+                                      reviewsObj
+                                          .fromJson(value
+                                          .data()))
+                                      .toList(),
+                                },
+                              await user
+                                  .where('userId',
+                                  isEqualTo:
+                                  FirebaseAuth
+                                      .instance
+                                      .currentUser
+                                      .uid)
+                                  .get()
+                                  .then((userval) =>
+                              {
+                                if (userval.docs[0]
+                                    .data()[
+                                'favPlaces']
+                                    .contains(
+                                    word.name))
+                                  {
+                                    setState(() {
+                                      _isFav = true;
+                                    })
+                                  }
+                                else
+                                  {
+                                    setState(() {
+                                      _isFav =
+                                      false;
+                                    })
+                                  }
+                              })
+                            })
+                          }
+                      });
+                      setState(() {
+                        _bool = true;
+                        childTitle = word;
+                        print(childTitle);
+                        print(_bool);
+                      });
+                    },
+                  ),
+                );
+                print(word.name);
+              }
+            },
+          ),
+          setState(() {
+            print("THIS IS NULL${_markers.length}");
+            widget.marks(_markers);
+          }),
+          print(widget.marks)
+        }));
   }
 
   checkDistance(String distanceF) {
@@ -385,7 +394,9 @@ class _Mapa extends State<Mapa> {
       _places.clear();
       _initMarkers(dist, category);
     }
-    if (distanceF.trim().isNotEmpty) {
+    if (distanceF
+        .trim()
+        .isNotEmpty) {
       print("empty");
       if (dist.compareTo(double.parse(distanceF)) != 0) {
         print("checkDistance");
@@ -402,13 +413,15 @@ class _Mapa extends State<Mapa> {
   }
 
   checkSearch(String searchFor) {
-    if (searchFor.trim().isNotEmpty) {
+    if (searchFor
+        .trim()
+        .isNotEmpty) {
       _marker.clear();
       for (var pc in _places) {
         if (pc.name.toLowerCase().contains(searchFor.toLowerCase())) {
           _marker.add(_markers
               .where((element) =>
-                  element.markerId == MarkerId('marker_id_${pc.name}'))
+          element.markerId == MarkerId('marker_id_${pc.name}'))
               .first);
         }
       }
@@ -450,8 +463,8 @@ class _Mapa extends State<Mapa> {
           markers: widget.offRoute
               ? _route
               : ((checkSearch(widget.searchFor))
-                  ? _marker
-                  : ((checkDistance(widget.distanceF)) ? _markers : _markers)),
+              ? _marker
+              : ((checkDistance(widget.distanceF)) ? _markers : _markers)),
           polylines: widget.offRoute ? polylines : emptyPoly,
         ),
         Stack(children: [
@@ -460,36 +473,27 @@ class _Mapa extends State<Mapa> {
               height: 725,
               child: _bool
                   ? GeneratedIPhoneXRXSMax117Widget(
-                      setFalse: _setFalse,
-                      setRoute: checkRoute,
-                      key: Key("PlaceDetails"),
-                      title: this.childTitle,
-                      setTrue: _setFalse,
-                      review: _reviews,
-                      isFav: _isFav,
-                    )
+                setFalse: _setFalse,
+                setRoute: checkRoute,
+                key: Key("PlaceDetails"),
+                title: this.childTitle,
+                setTrue: _setFalse,
+                review: _reviews,
+                isFav: _isFav,
+              )
                   : null),
           Container(
               alignment: Alignment.center,
               height: 700,
               child: _review
                   ? GeneratedIPhoneXRXSMax118Widget(
-                      key: Key("Review"),
-                      setTrue: _setReview,
-                      placeName: this.childTitle.name)
+                  key: Key("Review"),
+                  setTrue: _setReview,
+                  placeName: this.childTitle.name)
                   : null)
         ])
       ],
     );
   }
-
-  // void _setRoute(LatLng pointInital, LatLng pointFinal) {
-  //   List<LatLng> _latlng = [];
-  //   _latlng.add(pointInital);
-  //   _latlng.add(LatLng(10.9800, -74.7995));
-  //   _latlng.add(LatLng(10.9878, -74.7955));
-  //   _latlng.add(pointFinal);
-  //   _drawPoliLine(_latlng);
-  // }
 
 }

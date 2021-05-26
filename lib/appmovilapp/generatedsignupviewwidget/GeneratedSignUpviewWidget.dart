@@ -9,26 +9,26 @@ class GeneratedSignUpviewWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
         child: ClipRRect(
-      borderRadius: BorderRadius.zero,
-      child: Container(
-        width: 414.0,
-        height: 896.0,
-        child: Stack(
-            fit: StackFit.expand,
-            alignment: Alignment.center,
-            overflow: Overflow.visible,
-            children: [
-              Positioned(
-                left: -22.0,
-                top: -12.0,
-                right: null,
-                bottom: null,
-                width: 459.0,
-                height: 930.0,
-                child: GeneratedIPhoneXRXSMax112Widget(),
-              )
-            ]),
-      ),
-    ));
+          borderRadius: BorderRadius.zero,
+          child: Container(
+            width: 414.0,
+            height: 896.0,
+            child: Stack(
+                fit: StackFit.expand,
+                alignment: Alignment.center,
+                overflow: Overflow.visible,
+                children: [
+                  Positioned(
+                    left: -22.0,
+                    top: -12.0,
+                    right: null,
+                    bottom: null,
+                    width: 459.0,
+                    height: 930.0,
+                    child: GeneratedIPhoneXRXSMax112Widget(),
+                  )
+                ]),
+          ),
+        ));
   }
 }

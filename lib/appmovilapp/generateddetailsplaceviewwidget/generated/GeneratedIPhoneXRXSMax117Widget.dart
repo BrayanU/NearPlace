@@ -81,7 +81,6 @@ class GeneratedIPhoneXRXSMax117WidgetState
   @override
   Widget build(BuildContext context) {
     return Container(
-      //decoration: BoxDecoration(borderRadius: BorderRadius.zero),
       width: 350,
       height: 730,
       child: Stack(
@@ -89,128 +88,9 @@ class GeneratedIPhoneXRXSMax117WidgetState
           alignment: Alignment.center,
           overflow: Overflow.visible,
           children: [
-            /* Positioned(
-              left: 22.0,
-              top: 12.0,
-              right: null,
-              bottom: null,
-              width: 414.0,
-              height: 896.0,
-              child: GeneratedVectorWidget30(),
-            ), */
-            /* Positioned(
-              left: 0.0,
-              top: 0.0,
-              right: null,
-              bottom: null,
-              width: 459.0,
-              height: 930.0,
-              child: GeneratedRectangle3Widget6(),
-            ), */
-            /* Positioned(
-              left: 0.0,
-              top: 69.0,
-              right: null,
-              bottom: null,
-              width: 515.0,
-              height: 890.0,
-              child: GeneratedMapWidget3(),
-            ), */
-            /* Positioned(
-              left: 18.0,
-              top: 12.0,
-              right: null,
-              bottom: null,
-              width: 422.0,
-              height: 81.0,
-              child: GeneratedRectangle6Widget3(),
-            ),
-            Positioned(
-              left: 352.0,
-              top: 12.0,
-              right: null,
-              bottom: null,
-              width: 84.0,
-              height: 81.0,
-              child: GeneratedRectangle7Widget3(),
-            ), */
-            /*  Positioned(
-              left: 369.5,
-              top: 32.5,
-              right: null,
-              bottom: null,
-              width: 48.426998138427734,
-              height: 0.0,
-              child: GeneratedLine1Widget3(),
-            ),
-            Positioned(
-              left: 369.5,
-              top: 50.5,
-              right: null,
-              bottom: null,
-              width: 48.426998138427734,
-              height: 0.0,
-              child: GeneratedLine2Widget2(),
-            ),
-            Positioned(
-              left: 369.5,
-              top: 68.5,
-              right: null,
-              bottom: null,
-              width: 48.426998138427734,
-              height: 0.0,
-              child: GeneratedLine3Widget3(),
-            ), */
-            /* Positioned(
-              left: 61.0,
-              top: 35.0,
-              right: null,
-              bottom: null,
-              width: 96.0,
-              height: 30.0,
-              child: GeneratedOpcinWidget1(),
-            ), */
-            /* Positioned(
-              left: 109.0,
-              top: 242.0,
-              right: null,
-              bottom: null,
-              width: 31.388015747070312,
-              height: 75.8479995727539,
-              child: GeneratedPinWidget4(),
-            ),
-            Positioned(
-              left: 179.0,
-              top: 553.0,
-              right: null,
-              bottom: null,
-              width: 31.388015747070312,
-              height: 75.8479995727539,
-              child: GeneratedPinWidget5(),
-            ),
-            Positioned(
-              left: 315.0,
-              top: 317.0,
-              right: null,
-              bottom: null,
-              width: 31.388015747070312,
-              height: 75.8479995727539,
-              child: GeneratedPinWidget6(),
-            ),
-            Positioned(
-              left: 267.0,
-              top: 713.0,
-              right: null,
-              bottom: null,
-              width: 31.388015747070312,
-              height: 75.8479995727539,
-              child: GeneratedPinWidget7(),
-            ), */
             Stack(
               children: [
                 Positioned(
-/*                   left: 56.0,
-                  top: 127.0, */
                   right: null,
                   bottom: null,
                   width: 347.0,
@@ -288,51 +168,6 @@ class GeneratedIPhoneXRXSMax117WidgetState
                         color: Color.fromARGB(255, 112, 112, 112),
                       )),
                 ),
-                /* Positioned(
-              left: 86.00221252441406,
-              top: 198.99948120117188,
-              right: null,
-              bottom: null,
-              width: 23.236413955688477,
-              height: 22.275136947631836,
-              child: GeneratedStar1Widget(),
-            ),
-            Positioned(
-              left: 113.00221252441406,
-              top: 198.99948120117188,
-              right: null,
-              bottom: null,
-              width: 23.236413955688477,
-              height: 22.275136947631836,
-              child: GeneratedStar1Widget1(),
-            ),
-            Positioned(
-              left: 140.00221252441406,
-              top: 198.99948120117188,
-              right: null,
-              bottom: null,
-              width: 23.236413955688477,
-              height: 22.275136947631836,
-              child: GeneratedStar1Widget2(),
-            ),
-            Positioned(
-              left: 167.00221252441406,
-              top: 198.99948120117188,
-              right: null,
-              bottom: null,
-              width: 23.236413955688477,
-              height: 22.275136947631836,
-              child: GeneratedStar1Widget3(),
-            ),
-            Positioned(
-              left: 194.00221252441406,
-              top: 198.99948120117188,
-              right: null,
-              bottom: null,
-              width: 23.236413955688477,
-              height: 22.275136947631836,
-              child: GeneratedStar1Widget4(),
-            ), */
                 Positioned(
                     top: 40,
                     left: 20,
@@ -363,13 +198,6 @@ class GeneratedIPhoneXRXSMax117WidgetState
                         color: Color.fromARGB(255, 112, 112, 112),
                       )),
                 ),
-                // Positioned(
-                //   left: 20.0,
-                //   top: 90.0,
-                //   right: null,
-                //   bottom: null,
-                //   //child: GeneratedRectangle12Widget(),
-                // ),
                 Positioned(
                   left: 20,
                   top: 120.0,

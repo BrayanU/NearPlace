@@ -6,8 +6,10 @@ import 'package:flutterapp/appmovilapp/generateddetailsplaceviewwidget/generated
   */
 class GeneratedDetailsplaceviewWidget extends StatefulWidget {
   final ValueChanged<bool> setFalse;
+
   const GeneratedDetailsplaceviewWidget({Key key, this.setFalse})
       : super(key: key);
+
   @override
   GeneratedDetailsplaceviewWidgetState createState() =>
       GeneratedDetailsplaceviewWidgetState();
@@ -19,10 +21,10 @@ class GeneratedDetailsplaceviewWidgetState
   Widget build(BuildContext context) {
     return Material(
         child: ClipRRect(
-      borderRadius: BorderRadius.zero,
-      child: Container(
-        child: GeneratedIPhoneXRXSMax117Widget(setFalse: widget.setFalse),
-      ),
-    ));
+          borderRadius: BorderRadius.zero,
+          child: Container(
+            child: GeneratedIPhoneXRXSMax117Widget(setFalse: widget.setFalse),
+          ),
+        ));
   }
 }

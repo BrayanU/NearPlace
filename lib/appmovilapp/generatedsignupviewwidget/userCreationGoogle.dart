@@ -93,11 +93,12 @@ class userCreationGoogle extends StatelessWidget {
                         print(FirebaseAuth.instance.currentUser);
                         GeneratedIPhoneXRXSMax112Widget()
                             .addUser(
-                                FirebaseAuth.instance.currentUser.email,
-                                this.controllerName.text,
-                                FirebaseAuth.instance.currentUser.uid,
-                                this.controllerPhone.text)
-                            .then((value) => Navigator.pushNamed(
+                            FirebaseAuth.instance.currentUser.email,
+                            this.controllerName.text,
+                            FirebaseAuth.instance.currentUser.uid,
+                            this.controllerPhone.text)
+                            .then((value) =>
+                            Navigator.pushNamed(
                                 context, '/GeneratedWelcomeviewWidget'));
                       }
                     },

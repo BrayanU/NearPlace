@@ -34,24 +34,22 @@ class appMovilApp extends StatelessWidget {
       ),
       home: Scaffold(
           body: FutureBuilder(
-        future: _initialization,
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            print("Error ${snapshot.error}");
-            return Wrong();
-          } else if (snapshot.connectionState == ConnectionState.done) {
-            print(FirebaseAuth.instance.currentUser);
-            if (FirebaseAuth.instance.currentUser == null) {
-              print("shouldn't be here");
-              return GeneratedPrimeraviewWidget();
-            } else {
-              print("Aqui toy");
-              return GeneratedWelcomeviewWidget();
-            }
-          }
-          return Loading();
-        },
-      )),
+            future: _initialization,
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                print("Error ${snapshot.error}");
+                return Wrong();
+              } else if (snapshot.connectionState == ConnectionState.done) {
+                if (FirebaseAuth.instance.currentUser == null) {
+                  return GeneratedPrimeraviewWidget();
+                } else {
+                  return GeneratedWelcomeviewWidget();
+                }
+              }
+              return Loading();
+            },
+          )
+      ),
       //initialRoute: '/GeneratedPrimeraviewWidget',
       routes: {
         '/GeneratedPrimeraviewWidget': (context) =>
